@@ -15,9 +15,10 @@
 
 // layers
 #define DEFAULT 0
-#define LOWER 1
-#define MAGIC 2
-#define FACTORY_TEST 3
+#define SYMBOLS 1
+#define LOWER 2
+#define MAGIC 3
+#define FACTORY_TEST 4
 
 / {
     behaviors {
@@ -28,7 +29,7 @@
             label = "LAYER_TAP_DANCE";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&mo LOWER>, <&to LOWER>;
+            bindings = <&mo SYMBOLS>, <&to SYMBOLS>;
         };
 
         magic: magic_hold_tap {
@@ -88,26 +89,68 @@
     };
 
     keymap {
+        // TEMPLATE
+        // |   |   |   |   |   | __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |   |
+        // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
+        // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
+        //>|   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
+        // |   |   |   |   |   |    |    |    |    | |    |    |    |    |   |   |   |   |   |
+        // |✨ |   |   |   |   | __ |    |    |    | |    |    |    | __ |   |   |   |   |   |
         compatible = "zmk,keymap";
 
+        // Base
+        // |F1 |F2 |F3 |F4 |F5 | __ | __ | __ | __ | | __ | __ | __ | __ |F6 |F7 |F8 |F9 |F10|
+        // |F11| 1 | 2 | 3 | 4 | 5  | __ | __ | __ | | __ | __ | __ |  6 | 7 | 8 | 9 | 0 |F12|
+        // |Tab| Q | W | E | R | T  | __ | __ | __ | | __ | __ | __ |  Y | U | I | O | P |   |
+        //>|   | A | S | D | F | G  | __ | __ | __ | | __ | __ | __ |  H | J | K | L | ; |   |
+        // |   | Z | X | C | V | B  | Esc|Ctrl|Layr| | Sys|Ctrl|Ret |  N | M | , | . | / |   |
+        // |✨ |Hom|End|Lft|Rgt| __ |Bksp|Shft|LAlt| |LayS|Shft|Spce| __ |Dwn|Up |   |   |   |
         default_layer {
-            // ---------------------------------------------------------------------------------------------------------------------------------
-            // |  F1   |  F2 |  F3 |  F4  |  F5  |                                                               |  F6   |  F7   |  F8  |   F9  |  F10 |
-            // |  =    |  1  |  2  |  3   |  4   |  5   |                                                 |  6   |   7   |   8   |  9   |   0   |   -  |
-            // |  TAB  |  Q  |  W  |  E   |  R   |  T   |                                                 |  Y   |   U   |   I   |  O   |   P   |   \  |
-            // |  ESC  |  A  |  S  |  D   |  F   |  G   |                                                 |  H   |   J   |   K   |  L   |   ;   |   '  |
-            // |   `   |  Z  |  X  |  C   |  V   |  B   | LSHFT | LCTRL | LOWER | | LGUI  | RCTRL | RSHFT |  N   |   M   |   ,   |  .   |   /   | PGUP |
-            // | MAGIC | HOME| END | LEFT | RIGHT|      | BSPC  | DEL   | LALT  | | RALT  | RET   | SPACE |      |  DOWN |  UP   |  [   |   ]   | PGDN |
-
             bindings = <
             &kp F1         &kp F2   &kp F3      &kp F4      &kp F5                                                                                         &kp F6    &kp F7      &kp F8      &kp F9      &kp F10
-            &kp EQUAL      &kp N1   &kp N2      &kp N3      &kp N4      &kp N5                                                                     &kp N6  &kp N7    &kp N8      &kp N9      &kp N0      &kp MINUS
+            &kp F11        &kp N1   &kp N2      &kp N3      &kp N4      &kp N5                                                                     &kp N6  &kp N7    &kp N8      &kp N9      &kp N0      &kp F12
             &kp TAB        &kp Q    &kp W       &kp E       &kp R       &kp T                                                                      &kp Y   &kp U     &kp I       &kp O       &kp P       &kp BSLH
             &kp ESC        &kp A    &kp S       &kp D       &kp F       &kp G                                                                      &kp H   &kp J     &kp K       &kp L       &kp SEMI    &kp SQT
-            &kp GRAVE      &kp Z    &kp X       &kp C       &kp V       &kp B   &kp LSHFT   &kp LCTRL   &layer_td  &kp LGUI  &kp RCTRL &kp RSHFT   &kp N   &kp M     &kp COMMA   &kp DOT     &kp FSLH    &kp PG_UP
-            &magic MAGIC 0 &kp HOME &kp END     &kp LEFT    &kp RIGHT           &kp BSPC    &kp DEL     &kp LALT   &kp RALT  &kp RET   &kp SPACE           &kp DOWN  &kp UP      &kp LBKT    &kp RBKT    &kp PG_DN
+            &kp GRAVE      &kp Z    &kp X       &kp C       &kp V       &kp B   &kp ESC     &kp LCTRL   &layer_td  &kp LGUI  &kp RCTRL  &kp RET    &kp N   &kp M     &kp COMMA   &kp DOT     &kp FSLH    &kp PG_UP
+            &magic MAGIC 0 &kp HOME &kp END     &kp LEFT    &kp RIGHT           &kp BSPC    &kp LSHFT   &kp LALT   &kp RALT  &kp RSHIFT &kp SPACE           &kp DOWN  &kp UP      &kp LBKT    &kp RBKT    &kp PG_DN
             >;
         };
+
+        // Symbols
+        // |   |   |   |   |   | __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |   |
+        // |   | ! |   |   |   | %  | __ | __ | __ | | __ | __ | __ |  ^ |   |   |   | ø |   |
+        // |   | ? | = | { | } | '  | __ | __ | __ | | __ | __ | __ |  # |   | & |   | ^ |   |
+        //>|   | @ | * | ( | ) | "  | __ | __ | __ | | __ | __ | __ |  < | - |Pip| > | ; |   |
+        // |   | € | $ | [ | ] | `  |    |    |    | |    |    |    |  \ | ~ | , | . | / |   |
+        // |✨ |   |   |   |   | __ |    |    |    | |    |    |    | __ |PDn|PUp|   |   |   |
+        symbol_layer {
+            bindings = <
+            &trans    &trans        &trans          &trans          &trans                                                                                                          &kp C_MUTE   &kp C_VOL_DN &kp C_VOL_UP  &none           &kp PAUSE_BREAK
+            &trans    &none         &none           &none           &none           &kp HOME                                                                              &kp LPAR     &kp KP_NUM   &kp KP_EQUAL &kp KP_DIVIDE &kp KP_MULTIPLY &kp PSCRN
+            &trans    &none         &none           &kp UP          &none           &kp END                                                                               &kp RPAR     &kp KP_N7    &kp KP_N8    &kp KP_N9     &kp KP_MINUS    &kp SLCK
+            &trans    &none         &kp LEFT        &kp DOWN        &kp RIGHT       &kp PG_UP                                                                             &kp PRCNT    &kp KP_N4    &kp KP_N5    &kp KP_N6     &kp KP_PLUS     &none
+            &trans    &kp K_CMENU   &none           &kp F11         &kp F12         &kp PG_DN       &trans      &trans      &to DEFAULT &trans      &trans      &trans    &kp COMMA    &kp KP_N1    &kp KP_N2    &kp KP_N3     &kp KP_ENTER    &trans
+            &trans    &kp CAPS      &kp INS         &kp F11         &kp F12                         &trans      &trans      &trans      &trans      &trans      &trans                 &kp KP_N0    &kp KP_N0    &kp KP_DOT    &kp KP_ENTER    &trans
+            >;
+        };
+
+        // German
+        // |   |   |   |   |   | __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |   |
+        // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
+        // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    | Ü |   | Ö |   |   |
+        //>|   | Ä | ß |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
+        // |   |   |   |   |   |    |    |    |    | |    |    |    |    |   |   |   |   |   |
+        // |✨ |   |   |   |   | __ |    |    |    | |    |    |    | __ |   |   |   |   |   |
+
+
+        // Numblock
+        // |   |   |   |   |   | __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |   |
+        // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |  ^ |   |   | / | * | - |
+        // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   | 7 | 8 | 9 | + |
+        //>|   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   | 4 | 5 | 6 | + |
+        // |   |   |   |   |   |    |    |    |    | |    |    |    |    |   | 1 | 2 | 3 | = |
+        // |✨ |   |   |   |   | __ |    |    |    | |    |    |    | __ |   | 0 | 0 | . | = |
+
 
         lower_layer {
             bindings = <
