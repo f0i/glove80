@@ -14,7 +14,7 @@
 #include "keys_de.h"
 
 #define HYPER LC(LS(LG(LALT)))
-#define DE_AGV RALT(DE_O)
+#define DE_AGV RA(DE_O)
 
 // layers
 #define DEFAULT 0
@@ -176,22 +176,16 @@
                 <&trans &trans &trans &trans &trans>,
 
                 // number row
-                <&trans &trans &trans &trans &trans &trans>,
-                <&trans &trans &trans &trans &trans &trans>,
-                //<&trans &kp DE_EXCL &trans &trans &trans &kp DE_PERCENT>,
-                //<&kp DE_CARET &trans &trans &trans &kp DE_AGV &trans>,
+                <&trans &kp DE_EXCL &trans &trans &trans &kp DE_PERCENT>,
+                <&kp DE_CARET &trans &trans &trans &kp DE_AGV &trans>,
 
                 // upper row
-                <&trans &trans &trans &trans &trans &trans>,
-                <&trans &trans &trans &trans &trans &trans>,
-                //<&trans &kp DE_QUESTION &kp DE_EQUAL &kp DE_LBRC &kp DE_RBRC &kp DE_SQT>,
-                //<&kp DE_HASH &none &kp DE_AMPS &trans &kp DE_CARET &trans>,
+                <&trans &kp DE_QUESTION &kp DE_EQUAL &kp DE_LBRC &kp DE_RBRC &kp DE_SQT>,
+                <&kp DE_HASH &none &kp DE_AMPS &trans &kp DE_CARET &trans>,
 
                 // home row
-                <&trans &trans &trans &trans &trans &trans>,
-                <&trans &trans &trans &trans &trans &trans>,
-                //<&trans &kp DE_AT &kp DE_STAR &kp DE_LPAR &kp DE_RPAR &kp DE_DQT>,
-                //<&kp DE_LT &kp DE_MINUS &kp DE_PIPE &kp DE_GT &kp DE_SEMI &trans>,
+                <&trans &kp DE_AT &kp DE_STAR &kp DE_LPAR &kp DE_RPAR &kp DE_DQT>,
+                <&kp DE_LT &kp DE_MINUS &kp DE_PIPE &kp DE_GT &kp DE_SEMI &trans>,
 
                 // lower row left
                 <&trans &kp DE_EURO &kp DE_DOLLAR &kp DE_LBKT &kp DE_RBKT &trans>,
