@@ -19,8 +19,10 @@
 // layers
 #define DEFAULT 0
 #define SYMBOLS 1
-#define MAGIC 3
-#define FACTORY_TEST 4
+#define GERMAN 2
+#define NUMBLOCK 3
+#define MAGIC 4
+#define FACTORY_TEST 5
 
 // ZMK behaviors
 // &kp key: key press
@@ -122,10 +124,10 @@
         // DEFAULT
         // |F1 |F2 |F3 |F4 |F5 | __ | __ | __ | __ | | __ | __ | __ | __ |F6 |F7 |F8 |F9 |F10|
         // |F11| 1 | 2 | 3 | 4 | 5  | __ | __ | __ | | __ | __ | __ |  6 | 7 | 8 | 9 | 0 |F12|
-        // |Tab| Q | W | E | R | T  | __ | __ | __ | | __ | __ | __ |  Y | U | I | O | P |   |
+        // |   | Q | W | E | R | T  | __ | __ | __ | | __ | __ | __ |  Y | U | I | O | P |   |
         //>|   | A | S | D | F | G  | __ | __ | __ | | __ | __ | __ |  H | J | K | L | ; |   |
-        // |   | Z | X | C | V | B  | Esc|Ctrl|LAlt| |    |Ctrl|Ret |  N | M | , | . | / |   |
-        // |✨ |Hom|End|Lft|Rgt| __ |Bksp|Shft|Layr| |LayS|Shft|Spce| __ |Dwn|Up |PDn|PUp|Sys|
+        // |   | Z | X | C | V | B  | Esc|Ctrl|LAlt| |RAlt|Ctrl|Ret |  N | M | , | . | / |   |
+        // |✨ |Hom|End|Lft|Rgt| __ |Bksp|Shft|SYMB| |GERM|Shft|Spce| __ |Dwn|Up |PDn|PUp|Sys|
         //
         // Spce: &mod_space_tab
         default_layer {
@@ -139,7 +141,7 @@
                 <&kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &kp F12>,
 
                 // upper row (2 * 6 keys)
-                <&kp TAB &kp Q &kp W &kp E &kp R &kp T>,
+                <&none &kp Q &kp W &kp E &kp R &kp T>,
                 <&kp Y &kp U &kp I &kp O &kp P &kp BSLH>,
 
                 // home row (2 * 6 keys)
@@ -149,16 +151,16 @@
                 // lower row left (6 keys)
                 <&none &kp Z &kp X &kp C &kp V &kp B>,
                 // tumb upper (6 keys)
-                <&kp ESC &kp LCTRL &kp LALT &kp LGUI &kp RCTRL &kp RET>,
+                <&kp ESC &kp LCTRL &kp LALT &kp RALT &kp RCTRL &kp RET>,
                 // lower row right (6 keys)
                 <&kp N &kp M &kp COMMA &kp DOT &kp FSLH &kp PG_UP>,
 
                 // lowest left (5 keys)
                 <&magic MAGIC 0 &kp HOME &kp END &kp LEFT &kp RIGHT>,
                 // tumb lower (6 keys)
-                <&kp BSPC &kp LSHFT &td_symbols &kp RALT &kp RSHIFT &mod_space_tab>,
+                <&kp BSPC &kp LSHFT &td_symbols &mo GERMAN &kp RSHIFT &mod_space_tab>,
                 // lowest right (5 keys)
-                <&kp DOWN &kp UP &kp LBKT &kp RBKT &kp PG_DN>
+                <&kp DOWN &kp UP &kp PG_DN &kp PG_UP &kp LGUI>
             ;
         };
 
@@ -203,31 +205,77 @@
             ;
         };
 
-        // German
+        // GERMAN
         // |   |   |   |   |   | __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |   |
         // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
         // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    | Ü |   | Ö |   |   |
         //>|   | Ä | ß |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
         // |   |   |   |   |   |    |    |    |    | |    |    |    |    |   |   |   |   |   |
         // |✨ |   |   |   |   | __ |    |    |    | |    |    |    | __ |   |   |   |   |   |
+        german_layer {
+            bindings = 
+                // function row
+                <&trans &trans &trans &trans &trans>,
+                <&trans &trans &trans &trans &trans>,
+
+                // number row
+                <&trans &trans &trans &trans &trans &trans>,
+                <&trans &trans &trans &trans &trans &trans>,
+
+                // upper row
+                <&trans &trans &trans &trans &trans &trans>,
+                <&trans &kp DE_U_UMLAUT &trans &kp DE_O_UMLAUT &trans &trans>,
+
+                // home row
+                <&trans &kp DE_A_UMLAUT &kp DE_SZ &trans &trans &trans>,
+                <&trans &trans &trans &trans &trans &trans>,
+
+                // lower row left
+                <&trans &trans &trans &trans &trans &trans>,
+                // tumb upper
+                <&trans &trans &trans &trans &trans &trans>,
+                // lower row right
+                <&trans &trans &trans &trans &trans &trans>,
+
+                // lowest left
+                <&trans &trans &trans &trans &trans>,
+                // tumb lower
+                <&trans &trans &trans &trans &trans &trans>,
+                // lowest right
+                <&trans &trans &trans &trans &trans>
+            ;
+        };
 
 
-        // Numblock
+        // NUMBLOCK
         // |   |   |   |   |   | __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |   |
-        // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |  ^ |   |   | / | * | - |
-        // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   | 7 | 8 | 9 | + |
+        // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |  ^ |   |   | / | * |   |
+        // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   | 7 | 8 | 9 | - |
         //>|   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   | 4 | 5 | 6 | + |
         // |   |   |   |   |   |    |    |    |    | |    |    |    |    |   | 1 | 2 | 3 | = |
         // |✨ |   |   |   |   | __ |    |    |    | |    |    |    | __ |   | 0 | 0 | . | = |
-        layer_numblock {
-            bindings = <
-            &trans    &trans        &trans          &trans          &trans                                                                                                             &trans       &trans       &trans        &trans          &trans
-            &trans    &trans        &trans          &trans          &trans          &trans                                                                                &trans     &kp KP_NUM   &kp KP_EQUAL &kp KP_DIVIDE &kp KP_MULTIPLY &kp PSCRN
-            &trans    &trans        &trans          &trans          &trans          &trans                                                                                &trans     &kp KP_N7    &kp KP_N8    &kp KP_N9     &kp KP_MINUS    &kp SLCK
-            &trans    &trans        &trans          &trans          &trans          &trans                                                                                &trans     &kp KP_N4    &kp KP_N5    &kp KP_N6     &kp KP_PLUS     &none
-            &trans    &trans        &trans          &trans          &trans          &trans          &trans      &trans      &to DEFAULT &trans      &trans      &trans    &trans     &kp KP_N1    &kp KP_N2    &kp KP_N3     &kp KP_ENTER    &trans
-            &trans    &trans        &trans          &trans          &trans                          &trans      &trans      &trans      &trans      &trans      &trans               &kp KP_N0    &kp KP_N0    &kp KP_DOT    &kp KP_ENTER    &trans
-            >;
+        numblock_layer {
+            bindings =
+              <&trans &trans &trans &trans &trans>,
+              <&trans &trans &trans &trans &trans>,
+
+              <&trans &trans &trans &trans &trans &trans>,
+              <&trans &kp KP_NUM &kp KP_EQUAL &kp KP_DIVIDE &kp KP_MULTIPLY &trans>,
+
+              <&trans &trans &trans &trans &trans &trans>,
+              <&trans &kp KP_N7 &kp KP_N8 &kp KP_N9 &kp KP_MINUS &kp SLCK>,
+
+              <&trans &trans &trans &trans &trans &trans>,
+              <&trans &kp KP_N4 &kp KP_N5 &kp KP_N6 &kp KP_PLUS &none>,
+
+              <&trans &trans &trans &trans &trans &trans>,
+              <&trans &trans &to DEFAULT &trans &trans &trans>,
+              <&trans &kp KP_N1 &kp KP_N2 &kp KP_N3 &kp KP_ENTER &trans>,
+
+              <&trans &trans &trans &trans &trans>,
+              <&trans &trans &trans &trans &trans &trans>,
+              <&kp KP_N0 &kp KP_N0 &kp KP_DOT &kp KP_ENTER &trans>
+            ;
         };
 
         magic_layer {
@@ -259,38 +307,38 @@
         //>|   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
         // |   |   |   |   |   |    |    |    |    | |    |    |    |    |   |   |   |   |   |
         //L|✨ |   |   |   |   | __ |    |    |    | |    |    |    | __ |   |   |   |   |   |
-        //template_layer {
-        //    bindings = 
-        //        // function row
-        //        <&trans &trans &trans &trans &trans>,
-        //        <&trans &trans &trans &trans &trans>,
+        template_layer {
+            bindings = 
+                // function row
+                <&trans &trans &trans &trans &trans>,
+                <&trans &trans &trans &trans &trans>,
 
-        //        // number row
-        //        <&trans &trans &trans &trans &trans &trans>,
-        //        <&trans &trans &trans &trans &trans &trans>,
+                // number row
+                <&trans &trans &trans &trans &trans &trans>,
+                <&trans &trans &trans &trans &trans &trans>,
 
-        //        // upper row
-        //        <&trans &trans &trans &trans &trans &trans>,
-        //        <&trans &trans &trans &trans &trans &trans>,
+                // upper row
+                <&trans &trans &trans &trans &trans &trans>,
+                <&trans &trans &trans &trans &trans &trans>,
 
-        //        // home row
-        //        <&trans &trans &trans &trans &trans &trans>,
-        //        <&trans &trans &trans &trans &trans &trans>,
+                // home row
+                <&trans &trans &trans &trans &trans &trans>,
+                <&trans &trans &trans &trans &trans &trans>,
 
-        //        // lower row left
-        //        <&trans &trans &trans &trans &trans &trans>,
-        //        // tumb upper
-        //        <&trans &trans &trans &trans &trans &trans>,
-        //        // lower row right
-        //        <&trans &trans &trans &trans &trans &trans>,
+                // lower row left
+                <&trans &trans &trans &trans &trans &trans>,
+                // tumb upper
+                <&trans &trans &trans &trans &trans &trans>,
+                // lower row right
+                <&trans &trans &trans &trans &trans &trans>,
 
-        //        // lowest left
-        //        <&trans &trans &trans &trans &trans>,
-        //        // tumb lower
-        //        <&trans &trans &trans &trans &trans &trans>,
-        //        // lowest right
-        //        <&trans &trans &trans &trans &trans>
-        //    ;
-        //};
+                // lowest left
+                <&trans &trans &trans &trans &trans>,
+                // tumb lower
+                <&trans &trans &trans &trans &trans &trans>,
+                // lowest right
+                <&trans &trans &trans &trans &trans>
+            ;
+        };
     };
 };
