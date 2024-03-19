@@ -14,19 +14,38 @@
 #include "keys_de.h"
 
 #define HYPER LC(LS(LG(LALT)))
+#define DE_AGV RALT(DE_O)
 
 // layers
 #define DEFAULT 0
 #define SYMBOLS 1
-#define LOWER 2
 #define MAGIC 3
 #define FACTORY_TEST 4
 
+// ZMK behaviors
+// &kp key: key press
+// &none: nop
+// &trans: transparent (use active layer below)
+// &mo layer: momentary layer
+// &to layer: to layer (disable other layers except DEFAULT)
+// &lt layer key: layer tab (&mo layer on hold, &kp key on tab)
+// &tog layer: toggle layer
+// &ht_hp key1 key2: hold tab hold prefered (&kp key1 on hold, &kp key2 on tab)
+// &mt key1 key2: mod tap (&ht_hp key1 key2)
+// &ht_bl: hold tab balanced
+// &ht_tp: hold tab tab prefered
+// &sk key: sticky key (like &kp key but keep pressed until next key is pressed)
+// &sys_reset: system reset
+// &bootloader: start bootloader mode
+
+// Custom behaviors
+// &mod_space_tab: mod morph space to tab (&kp SPACE by default, &kp TAB if LSHFT, RSHIFT, LALT or RALT is active)
+// &magic: MoErgo magic key (tab for keyboard status, hold for magic layer)
+// td_symbols: tab dance to SYMBOLS (once for &mo SYMBOLS, twice for &to SYMBOLS)
+
 / {
     behaviors {
-        // For the "layer" key, it'd nice to be able to use it as either a shift or a toggle.
-        // Configure it as a tap dance, so the first tap (or hold) is a &mo and the second tap is a &to
-        layer_td: tap_dance_0 {
+        td_symbols: tap_dance_0 {
             compatible = "zmk,behavior-tap-dance";
             label = "LAYER_TAP_DANCE";
             #binding-cells = <0>;
@@ -41,6 +60,13 @@
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
             bindings = <&mo>, <&rgb_ug_status_macro>;
+        };
+
+        mod_space_tab: mod_morph_space_tab {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp SPACE>, <&kp TAB>;
+            mods = <(MOD_LSFT|MOD_RSFT|MOD_LALT|MOD_RALT)>;
         };
     };
 
@@ -91,22 +117,17 @@
     };
 
     keymap {
-        // TEMPLATE
-        // |   |   |   |   |   | __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |   |
-        // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
-        // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
-        //>|   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
-        // |   |   |   |   |   |    |    |    |    | |    |    |    |    |   |   |   |   |   |
-        // |✨ |   |   |   |   | __ |    |    |    | |    |    |    | __ |   |   |   |   |   |
         compatible = "zmk,keymap";
 
-        // Base
+        // DEFAULT
         // |F1 |F2 |F3 |F4 |F5 | __ | __ | __ | __ | | __ | __ | __ | __ |F6 |F7 |F8 |F9 |F10|
         // |F11| 1 | 2 | 3 | 4 | 5  | __ | __ | __ | | __ | __ | __ |  6 | 7 | 8 | 9 | 0 |F12|
         // |Tab| Q | W | E | R | T  | __ | __ | __ | | __ | __ | __ |  Y | U | I | O | P |   |
         //>|   | A | S | D | F | G  | __ | __ | __ | | __ | __ | __ |  H | J | K | L | ; |   |
-        // |   | Z | X | C | V | B  | Esc|Ctrl|Layr| | Sys|Ctrl|Ret |  N | M | , | . | / |   |
-        // |✨ |Hom|End|Lft|Rgt| __ |Bksp|Shft|LAlt| |LayS|Shft|Spce| __ |Dwn|Up |   |   |   |
+        // |   | Z | X | C | V | B  | Esc|Ctrl|LAlt| |    |Ctrl|Ret |  N | M | , | . | / |   |
+        // |✨ |Hom|End|Lft|Rgt| __ |Bksp|Shft|Layr| |LayS|Shft|Spce| __ |Dwn|Up |PDn|PUp|Sys|
+        //
+        // Spce: &mod_space_tab
         default_layer {
             bindings =
                 // function row (2 * 5 keys)
@@ -122,32 +143,32 @@
                 <&kp Y &kp U &kp I &kp O &kp P &kp BSLH>,
 
                 // home row (2 * 6 keys)
-                <&kp ESC &kp A &kp S &kp D &kp F &kp G>,
+                <&none &kp A &kp S &kp D &kp F &kp G>,
                 <&kp H &kp J &kp K &kp L &kp SEMI &kp SQT>,
 
                 // lower row left (6 keys)
-                <&kp GRAVE &kp Z &kp X &kp C &kp V &kp B>,
+                <&none &kp Z &kp X &kp C &kp V &kp B>,
                 // tumb upper (6 keys)
-                <&kp ESC &kp LCTRL &layer_td &kp LGUI &kp RCTRL &kp RET>,
+                <&kp ESC &kp LCTRL &kp LALT &kp LGUI &kp RCTRL &kp RET>,
                 // lower row right (6 keys)
                 <&kp N &kp M &kp COMMA &kp DOT &kp FSLH &kp PG_UP>,
 
-                // lowest left (6 keys)
+                // lowest left (5 keys)
                 <&magic MAGIC 0 &kp HOME &kp END &kp LEFT &kp RIGHT>,
                 // tumb lower (6 keys)
-                <&kp BSPC &kp LSHFT &kp LALT &kp RALT &kp RSHIFT &kp SPACE>,
-                // lowest right (6 keys)
+                <&kp BSPC &kp LSHFT &td_symbols &kp RALT &kp RSHIFT &mod_space_tab>,
+                // lowest right (5 keys)
                 <&kp DOWN &kp UP &kp LBKT &kp RBKT &kp PG_DN>
             ;
         };
 
-        // Symbols
+        // SYMBOLS
         //F|   |   |   |   |   | __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |   |
         //N|   | ! |   |   |   | %  | __ | __ | __ | | __ | __ | __ |  ^ |   |   |   | ø |   |
         // |   | ? | = | { | } | '  | __ | __ | __ | | __ | __ | __ |  # |   | & |   | ^ |   |
         //>|   | @ | * | ( | ) | "  | __ | __ | __ | | __ | __ | __ |  < | - |Pip| > | ; |   |
         // |   | € | $ | [ | ] | `  |    |    |    | |    |    |    |  \ | ~ | , | . | / |   |
-        //L|✨ |   |   |   |   | __ |    |    |    | |    |    |    | __ |PDn|PUp|   |   |   |
+        //L|✨ |   |   |   |   | __ |    |    |    | |    |    |    | __ |   |   |   |   |   |
         symbol_layer {
             bindings = 
                 // function row
@@ -157,28 +178,34 @@
                 // number row
                 <&trans &trans &trans &trans &trans &trans>,
                 <&trans &trans &trans &trans &trans &trans>,
+                //<&trans &kp DE_EXCL &trans &trans &trans &kp DE_PERCENT>,
+                //<&kp DE_CARET &trans &trans &trans &kp DE_AGV &trans>,
 
                 // upper row
                 <&trans &trans &trans &trans &trans &trans>,
-                <&kp DE_HASH &none &kp DE_AMPS &trans &kp DE_CARET &trans>,
+                <&trans &trans &trans &trans &trans &trans>,
+                //<&trans &kp DE_QUESTION &kp DE_EQUAL &kp DE_LBRC &kp DE_RBRC &kp DE_SQT>,
+                //<&kp DE_HASH &none &kp DE_AMPS &trans &kp DE_CARET &trans>,
 
                 // home row
                 <&trans &trans &trans &trans &trans &trans>,
                 <&trans &trans &trans &trans &trans &trans>,
+                //<&trans &kp DE_AT &kp DE_STAR &kp DE_LPAR &kp DE_RPAR &kp DE_DQT>,
+                //<&kp DE_LT &kp DE_MINUS &kp DE_PIPE &kp DE_GT &kp DE_SEMI &trans>,
 
                 // lower row left
-                <&trans &trans &trans &trans &trans &trans>,
+                <&trans &kp DE_EURO &kp DE_DOLLAR &kp DE_LBKT &kp DE_RBKT &trans>,
                 // tumb upper
                 <&trans &trans &trans &trans &trans &trans>,
                 // lower row right
-                <&trans &trans &trans &trans &trans &trans>,
+                <&kp DE_BACKSLASH &kp DE_TILDE &kp DE_COMMA &kp DE_PERIOD &kp DE_SLASH &trans>,
 
                 // lowest left
-                <&trans &trans &trans &trans &trans &trans>,
+                <&trans &trans &trans &trans &trans>,
                 // tumb lower
                 <&trans &trans &trans &trans &trans &trans>,
                 // lowest right
-                <&trans &trans &trans &trans &trans &trans>
+                <&trans &trans &trans &trans &trans>
             ;
         };
 
@@ -209,18 +236,6 @@
             >;
         };
 
-
-        lower_layer {
-            bindings = <
-            &kp C_BRI_DN      &kp C_BRI_UP        &kp C_PREV      &kp C_NEXT      &kp C_PP                                                                                                           &kp C_MUTE   &kp C_VOL_DN &kp C_VOL_UP  &none           &kp PAUSE_BREAK
-            &trans            &none               &none           &none           &none           &kp HOME                                                                              &kp LPAR     &kp KP_NUM   &kp KP_EQUAL &kp KP_DIVIDE &kp KP_MULTIPLY &kp PSCRN
-            &trans            &none               &none           &kp UP          &none           &kp END                                                                               &kp RPAR     &kp KP_N7    &kp KP_N8    &kp KP_N9     &kp KP_MINUS    &kp SLCK
-            &trans            &none               &kp LEFT        &kp DOWN        &kp RIGHT       &kp PG_UP                                                                             &kp PRCNT    &kp KP_N4    &kp KP_N5    &kp KP_N6     &kp KP_PLUS     &none
-            &trans            &kp K_CMENU         &none           &kp F11         &kp F12         &kp PG_DN       &trans      &trans      &to DEFAULT &trans      &trans      &trans    &kp COMMA    &kp KP_N1    &kp KP_N2    &kp KP_N3     &kp KP_ENTER    &trans
-            &trans            &kp CAPS            &kp INS         &kp F11         &kp F12                         &trans      &trans      &trans      &trans      &trans      &trans                 &kp KP_N0    &kp KP_N0    &kp KP_DOT    &kp KP_ENTER    &trans
-            >;
-        };
-
         magic_layer {
             bindings = <
             &bt BT_CLR        &none               &none           &none           &none                                                                                                           &none      &none      &none      &none      &bt BT_CLR_ALL
@@ -242,5 +257,46 @@
             &kp N5   &kp N1   &kp N7   &kp N3   &kp N9            &kp N7   &kp N8   &kp N9      &kp N9   &kp N8   &kp N7            &kp N9   &kp N3   &kp N7   &kp N1   &kp N5
             >;
         };
+
+        // TEMPLATE
+        //F|   |   |   |   |   | __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |   |
+        //N|   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
+        // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
+        //>|   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
+        // |   |   |   |   |   |    |    |    |    | |    |    |    |    |   |   |   |   |   |
+        //L|✨ |   |   |   |   | __ |    |    |    | |    |    |    | __ |   |   |   |   |   |
+        //template_layer {
+        //    bindings = 
+        //        // function row
+        //        <&trans &trans &trans &trans &trans>,
+        //        <&trans &trans &trans &trans &trans>,
+
+        //        // number row
+        //        <&trans &trans &trans &trans &trans &trans>,
+        //        <&trans &trans &trans &trans &trans &trans>,
+
+        //        // upper row
+        //        <&trans &trans &trans &trans &trans &trans>,
+        //        <&trans &trans &trans &trans &trans &trans>,
+
+        //        // home row
+        //        <&trans &trans &trans &trans &trans &trans>,
+        //        <&trans &trans &trans &trans &trans &trans>,
+
+        //        // lower row left
+        //        <&trans &trans &trans &trans &trans &trans>,
+        //        // tumb upper
+        //        <&trans &trans &trans &trans &trans &trans>,
+        //        // lower row right
+        //        <&trans &trans &trans &trans &trans &trans>,
+
+        //        // lowest left
+        //        <&trans &trans &trans &trans &trans>,
+        //        // tumb lower
+        //        <&trans &trans &trans &trans &trans &trans>,
+        //        // lowest right
+        //        <&trans &trans &trans &trans &trans>
+        //    ;
+        //};
     };
 };
