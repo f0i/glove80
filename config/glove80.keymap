@@ -68,7 +68,14 @@
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             bindings = <&kp SPACE>, <&kp TAB>;
-            mods = <(MOD_LSFT|MOD_RSFT|MOD_LALT|MOD_RALT)>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        mod_space_alt_tab: mod_morph_space_alt_tab {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&mod_space_tab>, <&kp LA(TAB)>;
+            mods = <(MOD_LALT)>;
         };
     };
 
@@ -129,7 +136,7 @@
         // |   | Z | X | C | V | B  | Esc|Ctrl|LAlt| |GERM|Ctrl|Ret |  N | M | , | . | / |   |
         // |✨ |Hom|End|Lft|Rgt| __ |Bksp|Shft|SYMB| |SYMB|Shft|Spce| __ |Dwn|Up |PDn|PUp|Sys|
         //
-        // Spce: &mod_space_tab
+        // Spce: &mod_space_alt_tab
         default_layer {
             bindings =
                 // function row (2 * 5 keys)
@@ -158,7 +165,7 @@
                 // lowest left (5 keys)
                 <&magic MAGIC 0 &kp HOME &kp END &kp LEFT &kp RIGHT>,
                 // tumb lower (6 keys)
-                <&kp BSPC &kp LSHFT &td_symbols &td_symbols &kp RSHIFT &mod_space_tab>,
+                <&kp BSPC &kp LSHFT &td_symbols &td_symbols &kp RSHIFT &mod_space_alt_tab>,
                 // lowest right (5 keys)
                 <&kp DOWN &kp UP &kp PG_DN &kp PG_UP &kp LGUI>
             ;
