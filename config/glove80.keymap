@@ -126,8 +126,8 @@
         // |F11| 1 | 2 | 3 | 4 | 5  | __ | __ | __ | | __ | __ | __ |  6 | 7 | 8 | 9 | 0 |F12|
         // |   | Q | W | E | R | T  | __ | __ | __ | | __ | __ | __ |  Y | U | I | O | P |   |
         //>|   | A | S | D | F | G  | __ | __ | __ | | __ | __ | __ |  H | J | K | L | ; |   |
-        // |   | Z | X | C | V | B  | Esc|Ctrl|LAlt| |RAlt|Ctrl|Ret |  N | M | , | . | / |   |
-        // |✨ |Hom|End|Lft|Rgt| __ |Bksp|Shft|SYMB| |GERM|Shft|Spce| __ |Dwn|Up |PDn|PUp|Sys|
+        // |   | Z | X | C | V | B  | Esc|Ctrl|LAlt| |GERM|Ctrl|Ret |  N | M | , | . | / |   |
+        // |✨ |Hom|End|Lft|Rgt| __ |Bksp|Shft|SYMB| |SYMB|Shft|Spce| __ |Dwn|Up |PDn|PUp|Sys|
         //
         // Spce: &mod_space_tab
         default_layer {
@@ -151,14 +151,14 @@
                 // lower row left (6 keys)
                 <&none &kp Z &kp X &kp C &kp V &kp B>,
                 // tumb upper (6 keys)
-                <&kp ESC &kp LCTRL &kp LALT &kp RALT &kp RCTRL &kp RET>,
+                <&kp ESC &kp LCTRL &kp LALT &kp GERMAN &kp RCTRL &kp RET>,
                 // lower row right (6 keys)
                 <&kp N &kp M &kp COMMA &kp DOT &kp FSLH &kp PG_UP>,
 
                 // lowest left (5 keys)
                 <&magic MAGIC 0 &kp HOME &kp END &kp LEFT &kp RIGHT>,
                 // tumb lower (6 keys)
-                <&kp BSPC &kp LSHFT &td_symbols &mo GERMAN &kp RSHIFT &mod_space_tab>,
+                <&kp BSPC &kp LSHFT &td_symbols &td_symbols &kp RSHIFT &mod_space_tab>,
                 // lowest right (5 keys)
                 <&kp DOWN &kp UP &kp PG_DN &kp PG_UP &kp LGUI>
             ;
