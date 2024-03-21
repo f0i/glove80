@@ -77,6 +77,13 @@
             bindings = <&mod_space_tab>, <&kp LA(TAB)>;
             mods = <(MOD_LALT)>;
         };
+
+        mod_bspc_del: mod_morph_backspace_delete {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp BSPC>, <&kp DEL>;
+            mods = <(MOD_LALT)>;
+        };
     };
 
     macros {
@@ -165,7 +172,7 @@
                 // lowest left (5 keys)
                 <&magic MAGIC 0 &kp HOME &kp END &kp LEFT &kp RIGHT>,
                 // tumb lower (6 keys)
-                <&kp BSPC &kp LSHFT &td_symbols &td_symbols &kp RSHIFT &mod_space_alt_tab>,
+                <&mod_bspc_del &kp LSHFT &td_symbols &td_symbols &kp RSHIFT &mod_space_alt_tab>,
                 // lowest right (5 keys)
                 <&kp DOWN &kp UP &kp PG_DN &kp PG_UP &kp LGUI>
             ;
@@ -176,7 +183,7 @@
         //N|   | ! |   |   |   | %  | __ | __ | __ | | __ | __ | __ |  ^ |   |   |   | ø |   |
         // |   | ? | = | { | } | '  | __ | __ | __ | | __ | __ | __ |  # | _ | & | + | ^ |   |
         //>|   | @ | * | ( | ) | "  | __ | __ | __ | | __ | __ | __ |  < | - |Pip| > | ; |   |
-        // |   | € | $ | [ | ] | `  |    |    |    | |    |    |    |  \ | ~ | , | . | / |   |
+        // |   | € | $ | [ | ] | `  |    |    |NUMB| |    |    |    |  \ | ~ | , | . | / |   |
         //L|✨ |   |   |   |   | __ |    |    |    | |    |    |    | __ |   |   |   |   |   |
         symbol_layer {
             bindings = 
@@ -199,7 +206,7 @@
                 // lower row left
                 <&trans &kp DE_EURO &kp DE_DOLLAR &kp DE_LBKT &kp DE_RBKT &trans>,
                 // tumb upper
-                <&trans &trans &trans &trans &trans &trans>,
+                <&trans &trans &to NUMBLOCK &trans &trans &trans>,
                 // lower row right
                 <&kp DE_BACKSLASH &kp DE_TILDE &kp DE_COMMA &kp DE_PERIOD &kp DE_SLASH &trans>,
 
@@ -256,11 +263,11 @@
 
         // NUMBLOCK
         // |   |   |   |   |   | __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |   |
-        // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |  ^ |   |   | / | * |   |
-        // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   | 7 | 8 | 9 | - |
-        //>|   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   | 4 | 5 | 6 | + |
-        // |   |   |   |   |   |    |    |    |    | |    |    |    |    |   | 1 | 2 | 3 | = |
-        // |✨ |   |   |   |   | __ |    |    |    | |    |    |    | __ |   | 0 | 0 | . | = |
+        // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |  ^ |   | / | * | - |   |
+        // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    | 7 | 8 | 9 | + |   |
+        //>|   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    | 4 | 5 | 6 | + |   |
+        // |   |   |   |   |   |    |    |    |    | |    |    |    |    | 1 | 2 | 3 |Ret|   |
+        // |✨ |   |   |   |   | __ |    |    |    | |    |    |    | __ | 0 | 0 | . |Ret|   |
         numblock_layer {
             bindings =
               <&trans &trans &trans &trans &trans>,
