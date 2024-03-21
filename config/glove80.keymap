@@ -149,18 +149,18 @@
 
                 // upper row (2 * 6 keys)
                 <&none &kp Q &kp W &kp E &kp R &kp T>,
-                <&kp DE_Y &kp U &kp I &kp O &kp P &kp BSLH>,
+                <&kp DE_Y &kp U &kp I &kp O &kp P &none>,
 
                 // home row (2 * 6 keys)
                 <&none &kp A &kp S &kp D &kp F &kp G>,
-                <&kp H &kp J &kp K &kp L &kp SEMI &kp SQT>,
+                <&kp H &kp J &kp K &kp L &kp DE_SEMI &none>,
 
                 // lower row left (6 keys)
                 <&none &kp DE_Z &kp X &kp C &kp V &kp B>,
                 // tumb upper (6 keys)
-                <&kp ESC &kp LCTRL &kp LALT &kp GERMAN &kp RCTRL &kp RET>,
+                <&kp ESC &kp LCTRL &kp LALT &mo GERMAN &kp RCTRL &kp RET>,
                 // lower row right (6 keys)
-                <&kp N &kp M &kp COMMA &kp DOT &kp FSLH &kp PG_UP>,
+                <&kp N &kp M &kp DE_COMMA &kp DE_DOT &kp DE_SLASH &none>,
 
                 // lowest left (5 keys)
                 <&magic MAGIC 0 &kp HOME &kp END &kp LEFT &kp RIGHT>,
