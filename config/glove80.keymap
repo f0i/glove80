@@ -174,7 +174,7 @@
         // SYMBOLS
         //F|   |   |   |   |   | __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |   |
         //N|   | ! |   |   |   | %  | __ | __ | __ | | __ | __ | __ |  ^ |   |   |   | ø |   |
-        // |   | ? | = | { | } | '  | __ | __ | __ | | __ | __ | __ |  # | _ | & |   | ^ |   |
+        // |   | ? | = | { | } | '  | __ | __ | __ | | __ | __ | __ |  # | _ | & | + | ^ |   |
         //>|   | @ | * | ( | ) | "  | __ | __ | __ | | __ | __ | __ |  < | - |Pip| > | ; |   |
         // |   | € | $ | [ | ] | `  |    |    |    | |    |    |    |  \ | ~ | , | . | / |   |
         //L|✨ |   |   |   |   | __ |    |    |    | |    |    |    | __ |   |   |   |   |   |
@@ -190,7 +190,7 @@
 
                 // upper row
                 <&trans &kp DE_QUESTION &kp DE_EQUAL &kp DE_LBRC &kp DE_RBRC &kp DE_SQT>,
-                <&kp DE_HASH &kp DE_UNDERSCORE &kp DE_AMPS &trans &kp DE_CARET &trans>,
+                <&kp DE_HASH &kp DE_UNDERSCORE &kp DE_AMPS &kp DE_PLUS &kp DE_CARET &trans>,
 
                 // home row
                 <&trans &kp DE_AT &kp DE_STAR &kp DE_LPAR &kp DE_RPAR &kp DE_DQT>,
