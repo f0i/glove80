@@ -181,9 +181,9 @@
         // SYMBOLS
         //F|   |   |   |   |   | __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |   |
         //N|   | ! |   |   |   | %  | __ | __ | __ | | __ | __ | __ |  ^ |   |   |   | ø |   |
-        // |   | ? | = | { | } | '  | __ | __ | __ | | __ | __ | __ |  # | _ | & | + | ^ |   |
+        // |   | ? | = | { | } | '  | __ | __ | __ | | __ | __ | __ |  # | ~ | & | + | ^ |   |
         //>|   | @ | * | ( | ) | "  | __ | __ | __ | | __ | __ | __ |  < | - |Pip| > | ; |   |
-        // |   | € | $ | [ | ] | `  |    |    |NUMB| |    |    |    |  \ | ~ | , | . | / |   |
+        // |   | € | $ | [ | ] | `  |    |    |NUMB| |    |    |    |  \ | _ | , | . | / |   |
         //L|✨ |   |   |   |   | __ |    |    |    | |    |    |    | __ |   |   |   |   |   |
         symbol_layer {
             bindings = 
@@ -204,7 +204,7 @@
                 <&kp DE_LT &kp DE_MINUS &kp DE_PIPE &kp DE_GT &kp DE_SEMI &trans>,
 
                 // lower row left
-                <&trans &kp DE_EURO &kp DE_DOLLAR &kp DE_LBKT &kp DE_RBKT &trans>,
+                <&trans &kp DE_EURO &kp DE_DOLLAR &kp DE_LBKT &kp DE_RBKT &kp DE_GRAVE>,
                 // tumb upper
                 <&trans &trans &to NUMBLOCK &trans &trans &trans>,
                 // lower row right
@@ -292,16 +292,44 @@
             ;
         };
 
+        // MAGIC
+        //F|BtC|   |   |   |   | __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |BtC|
+        //N|   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
+        // |   |RGB|RGB|RGB|RGB|RGB | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
+        //>|BLd|Spd|Sat|Hue|Brd|Efct| __ | __ | __ | | __ | __ | __ |    |   |   |   |   |BLd|
+        // |Rst|   |   |   |   |    | BT2| BT3|    | |    |    |    |    |   |   |   |   |Rst|
+        //L|✨ |   |   |   |   | __ | BT0| BT1| USB| |    |    |    | __ |   |   |   |   |   |
         magic_layer {
-            bindings = <
-            &bt BT_CLR        &none               &none           &none           &none                                                                                                           &none      &none      &none      &none      &bt BT_CLR_ALL
-            &none             &none               &none           &none           &none           &none                                                                                &none      &none      &none      &none      &none      &none
-            &none             &rgb_ug RGB_SPI     &rgb_ug RGB_SAI &rgb_ug RGB_HUI &rgb_ug RGB_BRI &rgb_ug RGB_TOG                                                                      &none      &none      &none      &none      &none      &none
-            &bootloader       &rgb_ug RGB_SPD     &rgb_ug RGB_SAD &rgb_ug RGB_HUD &rgb_ug RGB_BRD &rgb_ug RGB_EFF                                                                      &none      &none      &none      &none      &none      &bootloader
-            &sys_reset        &none               &none           &none           &none           &none           &bt_2     &bt_3     &none            &none     &none     &none       &none      &none      &none      &none      &none      &sys_reset
-            &none             &none               &none           &none           &none                           &bt_0     &bt_1     &out OUT_USB     &none     &none     &none                  &none      &none      &none      &none      &to FACTORY_TEST
-            >;
+            bindings =
+                <&bt BT_CLR &none &none &none &none>,
+                <&none &none &none &none &bt BT_CLR_ALL>,
+
+                <&none &none &none &none &none &none>,
+                <&none &none &none &none &none &none>,
+
+                <&none &rgb_ug RGB_SPI &rgb_ug RGB_SAI &rgb_ug RGB_HUI &rgb_ug RGB_BRI &rgb_ug RGB_TOG>,
+                <&none &none &none &none &none &none>,
+
+                <&bootloader &rgb_ug RGB_SPD &rgb_ug RGB_SAD &rgb_ug RGB_HUD &rgb_ug RGB_BRD &rgb_ug RGB_EFF>,
+                <&none &none &none &none &none &bootloader>,
+
+                <&sys_reset &none &none &none &none &none>,
+                <&bt_2 &bt_3 &none &none &none &none>,
+                <&none &none &none &none &none &sys_reset>,
+
+                <&none &none &none &none &none>,
+                <&bt_0 &bt_1 &out OUT_USB &none &none &none>,
+                <&none &none &none &none &to FACTORY_TEST>
+            ;
         };
+
+        // RGB
+        //F|   |   |Cap|Num|Scr| __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |   |
+        //N|DEF|SYM|GER|NUM|MAG|FACT| __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
+        // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
+        //>|   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
+        // |   |   |   |   |   |    |    |    |    | |    |    |    |    |   |   |   |   |   |
+        //L|✨ |   |   |   |   | __ |    |    |    | |    |    |    | __ |   |   |   |   |   |
 
         factory_test_layer {
             bindings = <
