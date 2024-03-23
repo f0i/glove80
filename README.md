@@ -5,6 +5,11 @@
 This is the ZMK configuration of my MoErgo Glove80 wireless split contoured keyboard.
 Most of the configuration is inside the [glove80.keymap](config/glove80.keymap) file.
 
+## Requirements
+
+- A [Glove80](https://www.moergo.com/collections/glove80-keyboards), obviously
+- Host should be set to use a German layout! For English layouts you would have to remove the `DE_*` prefix from several keys.
+
 ## Layers
 
 The keymaps can be shown using the `bin/keys` command, which greps the [glove80.keymap](config/glove80.keymap) to get the latest layouts.
