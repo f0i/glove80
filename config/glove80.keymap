@@ -14,6 +14,8 @@
 #include "keys_de.h"
 
 #define HYPER LC(LS(LG(LALT)))
+
+// ø
 #define DE_AGV RA(DE_O)
 
 // layers
@@ -22,7 +24,6 @@
 #define GERMAN 2
 #define NUMBLOCK 3
 #define MAGIC 4
-#define FACTORY_TEST 5
 
 // ZMK behaviors
 // &kp key: key press
@@ -82,7 +83,7 @@
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             bindings = <&kp BSPC>, <&kp DEL>;
-            mods = <(MOD_LALT)>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
         };
     };
 
@@ -139,7 +140,7 @@
         // |F1 |F2 |F3 |F4 |F5 | __ | __ | __ | __ | | __ | __ | __ | __ |F6 |F7 |F8 |F9 |F10|
         // |F11| 1 | 2 | 3 | 4 | 5  | __ | __ | __ | | __ | __ | __ |  6 | 7 | 8 | 9 | 0 |F12|
         // |   | Q | W | E | R | T  | __ | __ | __ | | __ | __ | __ |  Y | U | I | O | P |   |
-        //>|   | A | S | D | F | G  | __ | __ | __ | | __ | __ | __ |  H | J | K | L | ; |   |
+        //>|   | A | S | D | F | G  | __ | __ | __ | | __ | __ | __ |  H | J | K | L | - |   |
         // |   | Z | X | C | V | B  | Esc|Ctrl|LAlt| |GERM|Ctrl|Ret |  N | M | , | . | / |   |
         // |✨ |Hom|End|Lft|Rgt| __ |Bksp|Shft|SYMB| |SYMB|Shft|Spce| __ |Dwn|Up |PDn|PUp|Sys|
         //
@@ -160,7 +161,7 @@
 
                 // home row (2 * 6 keys)
                 <&none &kp A &kp S &kp D &kp F &kp G>,
-                <&kp H &kp J &kp K &kp L &kp DE_SEMI &none>,
+                <&kp H &kp J &kp K &kp L &kp DE_MINUS &none>,
 
                 // lower row left (6 keys)
                 <&none &kp DE_Z &kp X &kp C &kp V &kp B>,
@@ -172,7 +173,7 @@
                 // lowest left (5 keys)
                 <&magic MAGIC 0 &kp HOME &kp END &kp LEFT &kp RIGHT>,
                 // tumb lower (6 keys)
-                <&mod_bspc_del &kp LSHFT &td_symbols &td_symbols &kp RSHIFT &mod_space_alt_tab>,
+                <&mod_bspc_del &sk LSHFT &td_symbols &td_symbols &sk RSHIFT &mod_space_alt_tab>,
                 // lowest right (5 keys)
                 <&kp DOWN &kp UP &kp PG_DN &kp PG_UP &kp LGUI>
             ;
@@ -182,7 +183,7 @@
         //F|   |   |   |   |   | __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |   |
         //N|   | ! |   |   |   | %  | __ | __ | __ | | __ | __ | __ |  ^ |   |   |   | ø |   |
         // |   | ? | = | { | } | '  | __ | __ | __ | | __ | __ | __ |  # | ~ | & | + | ^ |   |
-        //>|   | @ | * | ( | ) | "  | __ | __ | __ | | __ | __ | __ |  < | - |Pip| > | ; |   |
+        //>|   | @ | * | ( | ) | "  | __ | __ | __ | | __ | __ | __ |  < | - |Pip| > | - |   |
         // |   | € | $ | [ | ] | `  |    |    |NUMB| |    |    |    |  \ | _ | , | . | / |   |
         //L|✨ |   |   |   |   | __ |    |    |    | |    |    |    | __ |   |   |   |   |   |
         symbol_layer {
@@ -201,7 +202,7 @@
 
                 // home row
                 <&trans &kp DE_AT &kp DE_STAR &kp DE_LPAR &kp DE_RPAR &kp DE_DQT>,
-                <&kp DE_LT &kp DE_MINUS &kp DE_PIPE &kp DE_GT &kp DE_SEMI &trans>,
+                <&kp DE_LT &kp DE_MINUS &kp DE_PIPE &kp DE_GT &kp DE_MINUS &trans>,
 
                 // lower row left
                 <&trans &kp DE_EURO &kp DE_DOLLAR &kp DE_LBKT &kp DE_RBKT &kp DE_GRAVE>,
@@ -263,32 +264,38 @@
 
         // NUMBLOCK
         // |   |   |   |   |   | __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |   |
-        // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |  ^ |   | / | * | - |   |
+        // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |  ^ |   | * |   |   |   |
         // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    | 7 | 8 | 9 | + |   |
-        //>|   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    | 4 | 5 | 6 | + |   |
+        //>|   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    | 4 | 5 | 6 | - |   |
         // |   |   |   |   |   |    |    |    |    | |    |    |    |    | 1 | 2 | 3 |Ret|   |
-        // |✨ |   |   |   |   | __ |    |    |    | |    |    |    | __ | 0 | 0 | . |Ret|   |
+        // |✨ |   |   |   |   | __ |    |    |SYMB| |SYMB|    |    | __ | 0 | 0 | . |Ret|   |
         numblock_layer {
             bindings =
+              // fuction row
               <&trans &trans &trans &trans &trans>,
               <&trans &trans &trans &trans &trans>,
 
+              // number row
               <&trans &trans &trans &trans &trans &trans>,
               <&trans &kp KP_NUM &kp KP_EQUAL &kp KP_DIVIDE &kp KP_MULTIPLY &trans>,
 
-              <&trans &trans &trans &trans &trans &trans>,
-              <&trans &kp KP_N7 &kp KP_N8 &kp KP_N9 &kp KP_MINUS &kp SLCK>,
+              // upper
+              <&none &none &none &none &none &none>,
+              <&none &kp KP_N7 &kp KP_N8 &kp KP_N9 &kp KP_PLUS &none>,
 
-              <&trans &trans &trans &trans &trans &trans>,
-              <&trans &kp KP_N4 &kp KP_N5 &kp KP_N6 &kp KP_PLUS &none>,
+              // home row
+              <&none &none &none &none &none &none>,
+              <&none &kp KP_N4 &kp KP_N5 &kp KP_N6 &kp KP_MINUS &none>,
 
-              <&trans &trans &trans &trans &trans &trans>,
-              <&trans &trans &to DEFAULT &trans &trans &trans>,
+              // lower
+              <&none &none &none &none &none &none>,
+              <&none &none &to DEFAULT &to DEFAULT &none &none>,
               <&trans &kp KP_N1 &kp KP_N2 &kp KP_N3 &kp KP_ENTER &trans>,
 
-              <&trans &trans &trans &trans &trans>,
-              <&trans &trans &trans &trans &trans &trans>,
-              <&kp KP_N0 &kp KP_N0 &kp KP_DOT &kp KP_ENTER &trans>
+              // lowers
+              <&none &none &none &none &none>,
+              <&none &none &to DEFAULT &to DEFAULT &none &none>,
+              <&kp KP_N0 &kp KP_N0 &kp KP_DOT &kp KP_ENTER &none>
             ;
         };
 
@@ -319,28 +326,18 @@
 
                 <&none &none &none &none &none>,
                 <&bt_0 &bt_1 &out OUT_USB &none &none &none>,
-                <&none &none &none &none &to FACTORY_TEST>
+                <&none &none &none &none &none>
             ;
         };
 
         // RGB
         //F|   |   |Cap|Num|Scr| __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |   |
-        //N|DEF|SYM|GER|NUM|MAG|FACT| __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
-        // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
-        //>|   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
-        // |   |   |   |   |   |    |    |    |    | |    |    |    |    |   |   |   |   |   |
-        //L|✨ |   |   |   |   | __ |    |    |    | |    |    |    | __ |   |   |   |   |   |
+        //N|DEF|SYM|GER|NUM|MAG|    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
+        // |UbL|UbL|UbL|UbL|UbL|UbL | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
+        //>|UbR|UbR|UbR|UbR|UbR|UbR | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
+        // |   |   |   |   |   |    | BT2| BT3|    | |    |    |    |    |   |   |   |   |   |
+        //L|✨ |   |   |   |   | __ | BT0| BT1| USB| |    |    |    | __ |   |   |   |   |   |
 
-        factory_test_layer {
-            bindings = <
-            &kp N0   &kp N6   &kp N2   &kp N8   &kp N4                                                                              &kp N4   &kp N8   &kp N2   &kp N6   &kp N0
-            &kp N1   &kp N7   &kp N3   &kp N9   &kp N5   &kp N0                                                            &kp N0   &kp N5   &kp N9   &kp N3   &kp N7   &kp N1
-            &kp N2   &kp N8   &kp N4   &kp N0   &kp N6   &kp N1                                                            &kp N1   &kp N6   &kp N0   &kp N4   &kp N8   &kp N2
-            &kp N3   &kp N9   &kp N5   &kp N1   &kp N7   &kp N2                                                            &kp N2   &kp N7   &kp N1   &kp N5   &kp N9   &kp N3
-            &kp N4   &kp N0   &kp N6   &kp N2   &kp N8   &kp N3   &kp N4   &kp N5   &kp N6      &kp N6   &kp N5   &kp N4   &kp N3   &kp N8   &kp N2   &kp N6   &kp N0   &kp N4
-            &kp N5   &kp N1   &kp N7   &kp N3   &kp N9            &kp N7   &kp N8   &kp N9      &kp N9   &kp N8   &kp N7            &kp N9   &kp N3   &kp N7   &kp N1   &kp N5
-            >;
-        };
 
         // TEMPLATE
         //F|   |   |   |   |   | __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |   |
@@ -367,18 +364,14 @@
                 <&trans &trans &trans &trans &trans &trans>,
                 <&trans &trans &trans &trans &trans &trans>,
 
-                // lower row left
+                // lower row
                 <&trans &trans &trans &trans &trans &trans>,
-                // tumb upper
                 <&trans &trans &trans &trans &trans &trans>,
-                // lower row right
                 <&trans &trans &trans &trans &trans &trans>,
 
-                // lowest left
+                // lowest row
                 <&trans &trans &trans &trans &trans>,
-                // tumb lower
                 <&trans &trans &trans &trans &trans &trans>,
-                // lowest right
                 <&trans &trans &trans &trans &trans>
             ;
         };
