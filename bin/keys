@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -eu -o pipefail
+
+cd "$(dirname "$0")"
+
+cat ../config/glove80.keymap | grep -B1 " //.[|A-Z]" | sed "s/ *../  /" | head -n -8
