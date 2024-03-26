@@ -36,9 +36,10 @@
 // &tog layer: toggle layer
 // &ht_hp key1 key2: hold tab hold prefered (&kp key1 on hold, &kp key2 on tab)
 // &mt key1 key2: mod tap (&ht_hp key1 key2)
-// &ht_bl: hold tab balanced
-// &ht_tp: hold tab tab prefered
-// &sk key: sticky key (like &kp key but keep pressed until next key is pressed)
+// &ht_bl key1 key2: hold tab balanced
+// &ht_tp key1 key2: hold tab tab prefered
+// &sk key key: sticky key (like &kp key but keep pressed until next key is pressed)
+// &ht_mo_kp layer key: like &ht_bl but with first parameter being a &mo layer
 // &sys_reset: system reset
 // &bootloader: start bootloader mode
 
@@ -66,10 +67,18 @@
             bindings = <&mo>, <&rgb_ug_status_macro>;
         };
 
+        ht_mo_kp: hold_tap_balanced_mo_kp {
+            compatible = "zmk,behavior-hold-tap";
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            #binding-cells = <2>;
+            bindings = <&mo>, <&kp>;
+        };
+
         mod_space_tab: mod_morph_space_tab {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp SPACE>, <&kp TAB>;
+            bindings = <&ht_mo_kp SYMBOLS SPACE>, <&kp TAB>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
@@ -85,6 +94,15 @@
             #binding-cells = <0>;
             bindings = <&kp BSPC>, <&kp DEL>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        skq: sticky_key_quick_release {
+            compatible = "zmk,behavior-sticky-key";
+            #binding-cells = <1>;
+            bindings = <&kp>;
+            release-after-ms = <1000>;
+            quick-release;
+            ignore-modifiers;
         };
     };
 
@@ -173,7 +191,7 @@
                 // lowest left (5 keys)
                 <&magic MAGIC 0 &kp HOME &kp END &kp LEFT &kp RIGHT>,
                 // tumb lower (6 keys)
-                <&mod_bspc_del &sk LSHFT &td_symbols &td_symbols &sk RSHIFT &mod_space_alt_tab>,
+                <&mod_bspc_del &skq LSHFT &td_symbols &td_symbols &skq RSHIFT &mod_space_alt_tab>,
                 // lowest right (5 keys)
                 <&kp DOWN &kp UP &kp PG_DN &kp PG_UP &kp LGUI>
             ;
@@ -182,9 +200,9 @@
         // SYMBOLS
         //F|   |   |   |   |   | __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |   |
         //N|   | ! |   |   |   | %  | __ | __ | __ | | __ | __ | __ |  ^ |   |   |   | ø |   |
-        // |   | ? | = | { | } | '  | __ | __ | __ | | __ | __ | __ |  # | ~ | & | + | ^ |   |
-        //>|   | @ | * | ( | ) | "  | __ | __ | __ | | __ | __ | __ |  < | - |Pip| > | - |   |
-        // |   | € | $ | [ | ] | `  |    |    |NUMB| |    |    |    |  \ | _ | , | . | / |   |
+        // |   | ? | = | { | ' | }  | __ | __ | __ | | __ | __ | __ |  # | ~ | & | + | ^ |   |
+        //>|   | @ | * | ( | " | )  | __ | __ | __ | | __ | __ | __ |  < | - |Pip| > | - |   |
+        // |   | € | $ | [ | ` | ]  |    |    |NUMB| |    |    |    |  \ | _ | , | . | / |   |
         //L|✨ |   |   |   |   | __ |    |    |    | |    |    |    | __ |   |   |   |   |   |
         symbol_layer {
             bindings = 
@@ -197,15 +215,15 @@
                 <&kp DE_CARET &trans &trans &trans &kp DE_AGV &trans>,
 
                 // upper row
-                <&trans &kp DE_QUESTION &kp DE_EQUAL &kp DE_LBRC &kp DE_RBRC &kp DE_SQT>,
+                <&trans &kp DE_QUESTION &kp DE_EQUAL &kp DE_LBRC &kp DE_SQT &kp DE_RBRC>,
                 <&kp DE_HASH &kp DE_TILDE &kp DE_AMPS &kp DE_PLUS &kp DE_CARET &trans>,
 
                 // home row
-                <&trans &kp DE_AT &kp DE_STAR &kp DE_LPAR &kp DE_RPAR &kp DE_DQT>,
+                <&trans &kp DE_AT &kp DE_STAR &kp DE_LPAR &kp DE_DQT &kp DE_RPAR>,
                 <&kp DE_LT &kp DE_MINUS &kp DE_PIPE &kp DE_GT &kp DE_MINUS &trans>,
 
                 // lower row left
-                <&trans &kp DE_EURO &kp DE_DOLLAR &kp DE_LBKT &kp DE_RBKT &kp DE_GRAVE>,
+                <&trans &kp DE_EURO &kp DE_DOLLAR &kp DE_LBKT &kp DE_GRAVE &kp DE_RBKT>,
                 // tumb upper
                 <&trans &trans &to NUMBLOCK &trans &trans &trans>,
                 // lower row right
@@ -292,9 +310,9 @@
               <&none &none &to DEFAULT &to DEFAULT &none &none>,
               <&trans &kp KP_N1 &kp KP_N2 &kp KP_N3 &kp KP_ENTER &trans>,
 
-              // lowers
-              <&none &none &none &none &none>,
-              <&none &none &to DEFAULT &to DEFAULT &none &none>,
+              // lowest
+              <&trans &none &none &none &none>,
+              <&none &none &mo SYMBOLS &mo SYMBOLS &none &none>,
               <&kp KP_N0 &kp KP_N0 &kp KP_DOT &kp KP_ENTER &none>
             ;
         };
