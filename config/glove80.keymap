@@ -248,7 +248,7 @@
                 // tumb upper
                 <&trans &trans &trans &trans &trans &trans>,
                 // lower row right
-                <&kp DE_BACKSLASH &kp DE_UNDERSCORE &kp DE_COMMA &kp DE_PERIOD &kp DE_SLASH &trans>,
+                <&kp DE_BACKSLASH &kp DE_UNDERSCORE &kp DE_SEMI &kp DE_COLON &kp DE_SLASH &trans>,
 
                 // lowest left
                 <&trans &trans &trans &trans &trans>,
