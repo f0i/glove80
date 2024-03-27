@@ -203,7 +203,7 @@
         // |   | ? | = | { | ' | }  | __ | __ | __ | | __ | __ | __ |  # | ~ | & |   | + |   |
         //>|   | @ | * | ( | " | )  | __ | __ | __ | | __ | __ | __ |  < | - |Pip| > | - |   |
         // |   | € | $ | [ | ` | ]  |    |    |    | |    |    |    |  \ | _ | ; | : | / |   |
-        //L|✨ |   |   |   |   | __ | Del|    |    | |    |    |    | __ |   |   |   |   |   |
+        //L|✨ |   |   |   |   | __ | Del|    |SIns| |    |    |    | __ |   |   |   |   |   |
         // comparrison to base layer:
         // - stays -
         // / stays /
@@ -253,7 +253,7 @@
                 // lowest left
                 <&trans &trans &trans &trans &trans>,
                 // tumb lower
-                <&trans &trans &trans &trans &trans &trans>,
+                <&kp DEL &trans &kp LS(INSERT) &trans &trans &trans>,
                 // lowest right
                 <&trans &trans &trans &trans &trans>
             ;
