@@ -236,7 +236,7 @@
                 <&kp DE_CARET &none &none &none &kp DE_AGV &trans>,
 
                 // upper row
-                <&trans &kp DE_QUESTION &kp DE_EQUAL &kp DE_LBRC &kp DE_SQT &none>,
+                <&trans &kp DE_QUESTION &kp DE_EQUAL &kp DE_LBRC &kp DE_SQT &kp DE_RBRC>,
                 <&kp DE_HASH &kp DE_TILDE &kp DE_AMPS &none &kp DE_PLUS &trans>,
 
                 // home row
