@@ -31,6 +31,8 @@
 // &none: nop
 // &trans: transparent (use active layer below)
 // &mo layer: momentary layer
+// &sk key: sticky key (like &kp key but keep pressed until next key is pressed)
+// &sl layer: sticky layer
 // &to layer: to layer (disable other layers except DEFAULT)
 // &lt layer key: layer tab (&mo layer on hold, &kp key on tab)
 // &tog layer: toggle layer
@@ -38,7 +40,6 @@
 // &mt key1 key2: mod tap (&ht_hp key1 key2)
 // &ht_bl key1 key2: hold tab balanced
 // &ht_tp key1 key2: hold tab tab prefered
-// &sk key key: sticky key (like &kp key but keep pressed until next key is pressed)
 // &ht_mo_kp layer key: like &ht_bl but with first parameter being a &mo layer
 // &sys_reset: system reset
 // &bootloader: start bootloader mode
@@ -55,7 +56,7 @@
             label = "LAYER_TAP_DANCE";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&mo SYMBOLS>, <&to SYMBOLS>;
+            bindings = <&sl SYMBOLS>, <&to SYMBOLS>;
         };
 
         magic: magic_hold_tap {
