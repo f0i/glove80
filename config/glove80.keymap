@@ -162,8 +162,10 @@
         // |   | Q | W | E | R | T  | __ | __ | __ | | __ | __ | __ |  Y | U | I | O | P |   |
         //>|   | A | S | D | F | G  | __ | __ | __ | | __ | __ | __ |  H | J | K | L | - |   |
         // |   | Z | X | C | V | B  | Esc|Ctrl|LAlt| |NUMB|Ctrl|Ret |  N | M | , | . | / |   |
-        //L|✨ |Hom|End|Lft|Rgt| __ |Bksp|Shft| Ins| |GERM|SYMB|Spce| __ |Dwn|Up |PDn|PUp|Sys|
+        //L|✨ |Hom|End|Lft|Rgt| __ |SYMB|Shft|GERM| |Ins |Bksp|Spce| __ |Dwn|Up |PDn|PUp|Sys|
         // Spce: &mod_space_alt_tab
+        // thumb cluster left mostly contains modifier keys
+        // thumb cluster right contains whitespace keys
         default_layer {
             bindings =
                 // function row (2 * 5 keys)
@@ -192,7 +194,7 @@
                 // lowest left (5 keys)
                 <&magic MAGIC 0 &kp HOME &kp END &kp LEFT &kp RIGHT>,
                 // tumb lower (6 keys)
-                <&mod_bspc_del &skq LSHFT &kp INSERT &mo GERMAN &td_symbols &mod_space_alt_tab>,
+                <&td_symbols &skq LSHFT &mo GERMAN &kp INSERT &mod_bspc_del &mod_space_alt_tab>,
                 // lowest right (5 keys)
                 <&kp DOWN &kp UP &kp PG_DN &kp PG_UP &kp LGUI>
             ;
@@ -204,7 +206,7 @@
         // |   | ? | = | { | ' | }  | __ | __ | __ | | __ | __ | __ |  # | ~ | & |   | + |   |
         //>|   | @ | * | ( | " | )  | __ | __ | __ | | __ | __ | __ |  < | - |Pip| > | - |   |
         // |   | € | $ | [ | ` | ]  |    |    |    | |    |    |    |  \ | _ | ; | : | / |   |
-        //L|✨ |   |   |   |   | __ | Del|    |SIns| |    |    |    | __ |   |   |   |   |   |
+        //L|✨ |   |   |   |   | __ |    |    |    | |SIns|Del |    | __ |   |   |   |   |   |
         // comparrison to base layer:
         // - stays -
         // / stays /
@@ -218,7 +220,8 @@
         // z becomes € because it's rarely used
         // x becomes $ next to € but easy to reach
         // w becomes = for eqWal ;)
-        // Bksp becomes Del
+        // Bksp becomes Del same as LS(Bksp)
+        // Ins becomes LS(Ins)
         // q becomes ? for Questionmark
         // 1 becomes ! which is the same as LS(1)
         // j u m become - ~ _ in a column with unerscore below
@@ -254,7 +257,7 @@
                 // lowest left
                 <&trans &trans &trans &trans &trans>,
                 // tumb lower
-                <&kp DEL &trans &kp LS(INSERT) &trans &trans &trans>,
+                <&trans &trans &trans &kp LS(INSERT) &kp DEL &trans>,
                 // lowest right
                 <&trans &trans &trans &trans &trans>
             ;
