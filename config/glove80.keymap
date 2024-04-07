@@ -17,7 +17,7 @@
 #define HYPER LC(LS(LG(LALT)))
 
 // ø
-#define DE_AGV RA(DE_O)
+#define DE_AVG RA(DE_O)
 
 // layers
 #define DEFAULT 0
@@ -162,7 +162,7 @@
         // |   | Q | W | E | R | T  | __ | __ | __ | | __ | __ | __ |  Y | U | I | O | P |   |
         //>|   | A | S | D | F | G  | __ | __ | __ | | __ | __ | __ |  H | J | K | L | - |   |
         // |   | Z | X | C | V | B  | Esc|Ctrl|LAlt| |NUMB|Ctrl|Ret |  N | M | , | . | / |   |
-        //L|✨ |Hom|End|Lft|Rgt| __ |SYMB|Shft|GERM| |Ins |Bksp|Spce| __ |Dwn|Up |PDn|PUp|Sys|
+        //L|Mag|Hom|End|Lft|Rgt| __ |SYMB|Shft|GERM| |Ins |Bksp|Spce| __ |Dwn|Up |PDn|PUp|Sys|
         // Spce: &mod_space_alt_tab
         // thumb cluster left mostly contains modifier keys
         // thumb cluster right contains whitespace keys
@@ -194,7 +194,7 @@
                 // lowest left (5 keys)
                 <&magic MAGIC 0 &kp HOME &kp END &kp LEFT &kp RIGHT>,
                 // tumb lower (6 keys)
-                <&td_symbols &skq LSHFT &mo GERMAN &kp INSERT &mod_bspc_del &mod_space_alt_tab>,
+                <&mo SYMBOLS &skq LSHFT &mo GERMAN &kp INSERT &mod_bspc_del &mod_space_alt_tab>,
                 // lowest right (5 keys)
                 <&kp DOWN &kp UP &kp PG_DN &kp PG_UP &kp LGUI>
             ;
@@ -202,33 +202,11 @@
 
         // SYMBOLS
         //F|   |   |   |   |   | __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |   |
-        //N|   | ! |   |   |   | %  | __ | __ | __ | | __ | __ | __ |  ^ |   |   |   | ø |   |
-        // |   | ? | = | { | ' | }  | __ | __ | __ | | __ | __ | __ |  # | ~ | & |   | + |   |
+        //N|   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |  ^ |   |   |   |   |   |
+        // |   | ? | = | { | ' | }  | __ | __ | __ | | __ | __ | __ |  # | & | ! | % | + |   |
         //>|   | @ | * | ( | " | )  | __ | __ | __ | | __ | __ | __ |  < | - |Pip| > | - |   |
         // |   | € | $ | [ | ` | ]  |    |    |    | |    |    |    |  \ | _ | ; | : | / |   |
-        //L|✨ |   |   |   |   | __ |    |    |    | |SIns|Del |    | __ |   |   |   |   |   |
-        // comparrison to base layer:
-        // - stays -
-        // / stays /
-        // . becomes : which is the same as LS(.)
-        // , becomes ; which is teh same as LS(,)
-        // p becomes + for Plus
-        // d e c become ( { [ in a column ordered by frequency of use
-        // g t b become ) } ] in a column matching ( { [ wiht one key skipped because they are often closed automatially
-        // f r v become " ' ` in a column ordered by frequency of use, was t for tick b for backtick but moved to left for accesability
-        // s becomes * for Star
-        // z becomes € because it's rarely used
-        // x becomes $ next to € but easy to reach
-        // w becomes = for eqWal ;)
-        // Bksp becomes Del same as LS(Bksp)
-        // Ins becomes LS(Ins)
-        // q becomes ? for Questionmark
-        // 1 becomes ! which is the same as LS(1)
-        // j u m become - ~ _ in a column with unerscore below
-        // h j k l become < - | > for typing <tag> |> -> whereas <-- can use the - from base layer to not use index finger twice
-        // y becomes # because its one of the easier to access keys that's left
-        // n becomes \ in the same row as /
-        // i becomes & to be above | as a logic operator
+        //L|Mag|   |   |   |   | __ |    |    |    | |SIns|Del |    | __ |   |   |   |   |   |
         symbol_layer {
             bindings = 
                 // function row
@@ -236,12 +214,12 @@
                 <&trans &trans &trans &trans &trans>,
 
                 // number row
-                <&trans &kp DE_EXCL &none &none &none &kp DE_PERCENT>,
-                <&kp DE_CARET &none &none &none &kp DE_AGV &trans>,
+                <&trans &none &none &none &none &none>,
+                <&kp DE_CARET &none &none &none &none &trans>,
 
                 // upper row
                 <&trans &kp DE_QUESTION &kp DE_EQUAL &kp DE_LBRC &kp DE_SQT &kp DE_RBRC>,
-                <&kp DE_HASH &kp DE_TILDE &kp DE_AMPS &none &kp DE_PLUS &trans>,
+                <&kp DE_HASH &kp DE_AMPS &kp DE_EXCL &kp DE_PERCENT &kp DE_PLUS &trans>,
 
                 // home row
                 <&trans &kp DE_AT &kp DE_STAR &kp DE_LPAR &kp DE_DQT &kp DE_RPAR>,
@@ -265,11 +243,11 @@
 
         // GERMAN
         //F|   |   |   |   |   | __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |   |
-        //N|   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
-        // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    | Ü |   | Ö |   |   |
+        //N|   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   | ø |   |
+        // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    | Ü |   | Ö | § |   |
         //>|   | Ä | ß |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
-        // |   |   |   |   |   |    |    |    |    | |    |    |    |    |   |   |   |   |   |
-        //L|✨ |   |   |   |   | __ |    |    |    | |    |    |    | __ |   |   |   |   |   |
+        // |   |   |   |   |   |    |    |    |    | |    |    |    |    | µ |   |   |   |   |
+        //L|Mag|   |   |   |   | __ |    |    |    | |    |    |STab| __ |   |   |   |   |   |
         german_layer {
             bindings = 
                 // function row
@@ -278,7 +256,7 @@
 
                 // number row
                 <&trans &trans &trans &trans &trans &trans>,
-                <&trans &trans &trans &trans &trans &trans>,
+                <&trans &trans &trans &trans &kp DE_AVG &trans>,
 
                 // upper row
                 <&trans &trans &trans &trans &trans &trans>,
@@ -293,12 +271,12 @@
                 // tumb upper
                 <&trans &trans &trans &trans &trans &trans>,
                 // lower row right
-                <&trans &trans &trans &trans &trans &trans>,
+                <&trans &kp DE_MICRO &trans &trans &trans &trans>,
 
                 // lowest left
                 <&trans &trans &trans &trans &trans>,
                 // tumb lower
-                <&trans &trans &trans &trans &trans &trans>,
+                <&trans &trans &trans &trans &trans &kp LS(TAB)>,
                 // lowest right
                 <&trans &trans &trans &trans &trans>
             ;
@@ -307,11 +285,11 @@
 
         // NUMBLOCK
         //F|   |   |   |   |   | __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |   |
-        //N|   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |  ^ |   | * |   |   |   |
+        //N|   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |  ^ |   |   |   | * |   |
         // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    | 7 | 8 | 9 | + |   |
         //>|   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    | 4 | 5 | 6 | - |   |
         // |   |   |   |   |   |    |    |    |    | |DEFA|    |    |    | 1 | 2 | 3 | / |   |
-        //L|✨ |   |   |   |   | __ |    |    |    | |    |    |    | __ | 0 | 0 | . |Ret|   |
+        //L|Mag|   |   |   |   | __ |    |    |    | |    |    |    | __ | 0 | , | . | : |   |
         numblock_layer {
             bindings =
               // fuction row
@@ -320,25 +298,25 @@
 
               // number row
               <&trans &trans &trans &trans &trans &trans>,
-              <&kp DE_CARET &kp KP_NUM &kp KP_EQUAL &kp KP_DIVIDE &kp KP_MULTIPLY &trans>,
+              <&kp DE_CARET &none &none &none &none &kp DE_STAR &trans>,
 
               // upper
               <&none &none &none &none &none &none>,
-              <&none &kp KP_N7 &kp KP_N8 &kp KP_N9 &kp KP_PLUS &none>,
+              <&none &kp N7 &kp N8 &kp N9 &kp DE_PLUS &none>,
 
               // home row
               <&none &none &none &none &none &none>,
-              <&none &kp KP_N4 &kp KP_N5 &kp KP_N6 &kp KP_MINUS &none>,
+              <&none &kp N4 &kp N5 &kp N6 &kp DE_MINUS &none>,
 
               // lower
               <&none &none &none &none &none &none>,
               <&trans &none &trans &to DEFAULT &trans &trans>,
-              <&trans &kp KP_N1 &kp KP_N2 &kp KP_N3 &kp KP_ENTER &trans>,
+              <&trans &kp N1 &kp N2 &kp N3 &kp DE_SLASH &trans>,
 
               // lowest
               <&trans &none &none &none &none>,
               <&trans &trans &trans &trans &trans &trans>,
-              <&kp KP_N0 &kp KP_N0 &kp KP_DOT &kp KP_ENTER &trans>
+              <&kp N0 &kp DE_COMMA &kp DE_DOT &kp DE_COLON &trans>
             ;
         };
 
@@ -348,7 +326,7 @@
         // |   |RGB|RGB|RGB|RGB|RGB | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
         //>|BLd|Spd|Sat|Hue|Brd|Efct| __ | __ | __ | | __ | __ | __ |    |   |   |   |   |BLd|
         // |Rst|   |   |   |   |    | BT2| BT3|    | |    |    |    |    |   |   |   |   |Rst|
-        //L|✨ |   |   |   |   | __ | BT0| BT1| USB| |    |    |    | __ |   |   |   |   |   |
+        //L|Mag|   |   |   |   | __ | BT0| BT1| USB| |    |    |    | __ |   |   |   |   |   |
         magic_layer {
             bindings =
                 <&bt BT_CLR &none &none &none &none>,
@@ -379,7 +357,7 @@
         // |UbL|UbL|UbL|UbL|UbL|UbL | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
         //>|UbR|UbR|UbR|UbR|UbR|UbR | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
         // |   |   |   |   |   |    | BT2| BT3|    | |    |    |    |    |   |   |   |   |   |
-        //L|✨ |   |   |   |   | __ | BT0| BT1| USB| |    |    |    | __ |   |   |   |   |   |
+        //L|Mag|   |   |   |   | __ | BT0| BT1| USB| |    |    |    | __ |   |   |   |   |   |
 
 
         // TEMPLATE
@@ -388,7 +366,7 @@
         // |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
         //>|   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
         // |   |   |   |   |   |    |    |    |    | |    |    |    |    |   |   |   |   |   |
-        //L|✨ |   |   |   |   | __ |    |    |    | |    |    |    | __ |   |   |   |   |   |
+        //L|Mag|   |   |   |   | __ |    |    |    | |    |    |    | __ |   |   |   |   |   |
         template_layer {
             bindings = 
                 // function row
