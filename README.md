@@ -14,6 +14,8 @@ Most of the configuration is inside the [glove80.keymap](config/glove80.keymap) 
 
 The keymaps can be shown using the `bin/keys` command, which greps the [glove80.keymap](config/glove80.keymap) to get the latest layouts.
 
+![demo](demo.png)
+
 ```text
 
    DEFAULT
