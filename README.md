@@ -79,6 +79,8 @@ The keymaps can be shown using the `bin/keys` command, which greps the [glove80.
 For your own configuration, you might want to create your own configuration based on
 the [MoErgo Glove80 template repo](https://github.com/moergo-sc/glove80-zmk-config).
 
+The `bin/keys` tool is build in rust and can be found at [github.com:f0i/glove80-keys).
+
 ## Firmware Files
 
 1. Download the glove80.uf2 from the latest run in [Github Actions](https://github.com/f0i/glove80/actions)
