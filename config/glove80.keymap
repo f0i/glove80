@@ -49,6 +49,10 @@
 // &magic: MoErgo magic key (tab for keyboard status, hold for magic layer)
 // td_symbols: tab dance to SYMBOLS (once for &mo SYMBOLS, twice for &to SYMBOLS)
 
+#define NO_SHIFT(name, key) KP_SHIFT(name, key, key)
+
+#define KP_SHIFT(name, key, shifted)  name: kp_shift_ ## name { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; bindings = <&kp key>, <&kp shifted>; mods = <(MOD_LGUI|MOD_LSFT|MOD_RSFT)>; }
+
 / {
     behaviors {
         td_symbols: tap_dance_0 {
@@ -105,6 +109,53 @@
             quick-release;
             ignore-modifiers;
         };
+
+        // the following keys should not be modified by shift
+        NO_SHIFT(n0, N0);
+        NO_SHIFT(n1, N1);
+        NO_SHIFT(n2, N2);
+        NO_SHIFT(n3, N3);
+        NO_SHIFT(n4, N4);
+        NO_SHIFT(n5, N5);
+        NO_SHIFT(n6, N6);
+        NO_SHIFT(n7, N7);
+        NO_SHIFT(n8, N8);
+        NO_SHIFT(n9, N9);
+
+        NO_SHIFT(question, DE_QUESTION);
+        NO_SHIFT(equal, DE_EQUAL);
+        NO_SHIFT(lbrc, DE_LBRC);
+        NO_SHIFT(sqt, DE_SQT);
+        NO_SHIFT(rbrc, DE_RBRC);
+        NO_SHIFT(hash, DE_HASH);
+        NO_SHIFT(amps, DE_AMPS);
+        NO_SHIFT(excl, DE_EXCL);
+        NO_SHIFT(percent, DE_PERCENT);
+        NO_SHIFT(plus, DE_PLUS);
+        NO_SHIFT(at, DE_AT);
+        NO_SHIFT(star, DE_STAR);
+        NO_SHIFT(lpar, DE_LPAR);
+        NO_SHIFT(dqt, DE_DQT);
+        NO_SHIFT(rpar, DE_RPAR);
+        NO_SHIFT(less_than, DE_LT); // &lt is already in use for layer-tab
+        NO_SHIFT(dollar, DE_DOLLAR);
+        NO_SHIFT(pipe, DE_PIPE);
+        NO_SHIFT(gt, DE_GT);
+        NO_SHIFT(minus, DE_MINUS);
+        NO_SHIFT(backslash, DE_BACKSLASH);
+        NO_SHIFT(caret, DE_CARET);
+        NO_SHIFT(lbkt, DE_LBKT);
+        NO_SHIFT(grave, DE_GRAVE);
+        NO_SHIFT(rbkt, DE_RBKT);
+        NO_SHIFT(tilde, DE_TILDE);
+        NO_SHIFT(underscore, DE_UNDERSCORE);
+        NO_SHIFT(semi, DE_SEMI);
+        NO_SHIFT(colon, DE_COLON);
+        NO_SHIFT(slash, DE_SLASH);
+
+        NO_SHIFT(sz, DE_SZ);
+        NO_SHIFT(section, DE_SECTION);
+        NO_SHIFT(micro, DE_MICRO);
     };
 
     macros {
@@ -173,8 +224,8 @@
                 <&kp F6 &kp F7 &kp F8 &kp F9 &kp F10>,
 
                 // number row (2 * 6 keys)
-                <&kp F11 &kp N1 &kp N2 &kp N3 &kp N4 &kp N5>,
-                <&kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &kp F12>,
+                <&kp F11 &n1 &n2 &n3 &n4 &n5>,
+                <&n6 &n7 &n8 &n9 &n0 &kp F12>,
 
                 // upper row (2 * 6 keys)
                 <&none &kp Q &kp W &kp E &kp R &kp T>,
@@ -208,29 +259,29 @@
         // |   | \ | ^ | [ | ` | ]  |    |    |    | |    |    |    |  ~ | _ | ; | : | / |   |
         //L|Mag|   |   |   |   | __ |    |    |    | |SIns|    |    | __ |   |   |   |   |   |
         symbol_layer {
-            bindings = 
+            bindings =
                 // function row
                 <&trans &trans &trans &trans &trans>,
                 <&trans &trans &trans &trans &trans>,
 
                 // number row
-                <&trans &none &none &none &none &none>,
-                <&none &none &none &none &none &trans>,
+                <&trans &trans &trans &trans &trans &trans>,
+                <&trans &trans &trans &trans &trans &trans>,
 
                 // upper row
-                <&trans &kp DE_QUESTION &kp DE_EQUAL &kp DE_LBRC &kp DE_SQT &kp DE_RBRC>,
-                <&kp DE_HASH &kp DE_AMPS &kp DE_EXCL &kp DE_PERCENT &kp DE_PLUS &trans>,
+                <&trans &question &equal &lbrc &sqt &rbrc>,
+                <&hash &amps &excl &percent &plus &trans>,
 
                 // home row
-                <&trans &kp DE_AT &kp DE_STAR &kp DE_LPAR &kp DE_DQT &kp DE_RPAR>,
-                <&kp DE_LT &kp DE_DOLLAR &kp DE_PIPE &kp DE_GT &kp DE_MINUS &trans>,
+                <&trans &at &star &lpar &dqt &rpar>,
+                <&less_than &dollar &pipe &gt &minus &trans>,
 
                 // lower row left
-                <&trans &kp DE_BACKSLASH &kp DE_CARET &kp DE_LBKT &kp DE_GRAVE &kp DE_RBKT>,
+                <&trans &backslash &caret &lbkt &grave &rbkt>,
                 // tumb upper
                 <&trans &trans &trans &trans &trans &trans>,
                 // lower row right
-                <&kp DE_TILDE &kp DE_UNDERSCORE &kp DE_SEMI &kp DE_COLON &kp DE_SLASH &trans>,
+                <&tilde &underscore &semi &colon &slash &trans>,
 
                 // lowest left
                 <&trans &trans &trans &trans &trans>,
@@ -249,7 +300,7 @@
         // |   |   |   |   |   |    |    |    |    | |    |    |    |    | µ |   |   |   |   |
         //L|Mag|   |   |   |   | __ |    |    |    | |    |    |STab| __ |   |   |   |   |   |
         german_layer {
-            bindings = 
+            bindings =
                 // function row
                 <&trans &trans &trans &trans &trans>,
                 <&trans &trans &trans &trans &trans>,
@@ -260,10 +311,10 @@
 
                 // upper row
                 <&trans &trans &trans &kp DE_EURO &trans &trans>,
-                <&trans &kp DE_U_UMLAUT &trans &kp DE_O_UMLAUT &trans &trans>,
+                <&trans &kp DE_U_UMLAUT &trans &kp DE_O_UMLAUT &section &trans>,
 
                 // home row
-                <&trans &kp DE_A_UMLAUT &kp DE_SZ &trans &trans &trans>,
+                <&trans &kp DE_A_UMLAUT &sz &trans &trans &trans>,
                 <&trans &trans &trans &trans &trans &trans>,
 
                 // lower row left
@@ -271,7 +322,7 @@
                 // tumb upper
                 <&trans &trans &trans &trans &trans &trans>,
                 // lower row right
-                <&trans &kp DE_MICRO &trans &trans &trans &trans>,
+                <&trans &micro &trans &trans &trans &trans>,
 
                 // lowest left
                 <&trans &trans &trans &trans &trans>,
@@ -368,7 +419,7 @@
         // |   |   |   |   |   |    |    |    |    | |    |    |    |    |   |   |   |   |   |
         //L|Mag|   |   |   |   | __ |    |    |    | |    |    |    | __ |   |   |   |   |   |
         template_layer {
-            bindings = 
+            bindings =
                 // function row
                 <&trans &trans &trans &trans &trans>,
                 <&trans &trans &trans &trans &trans>,
