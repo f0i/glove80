@@ -41,12 +41,13 @@
 // &ht_bl key1 key2: hold tab balanced
 // &ht_tp key1 key2: hold tab tab prefered
 // &ht_mo_kp layer key: like &ht_bl but with first parameter being a &mo layer
+// &ht_mo_to layer1 layer2: like &ht_mo_kp but with second parameter being a &to layer
 // &sys_reset: system reset
 // &bootloader: start bootloader mode
 
 // Custom behaviors
 // &mod_space_tab: mod morph space to tab (&kp SPACE by default, &kp TAB if LSHFT, RSHIFT, LALT or RALT is active)
-// &magic: MoErgo magic key (tab for keyboard status, hold for magic layer)
+// &magic layer rgb_ug: MoErgo magic key (tab for keyboard status, hold for magic layer)
 // td_symbols: tab dance to SYMBOLS (once for &mo SYMBOLS, twice for &to SYMBOLS)
 
 #define NO_SHIFT(name, key) KP_SHIFT(name, key, key)
@@ -73,6 +74,14 @@
         };
 
         ht_mo_kp: hold_tap_balanced_mo_kp {
+            compatible = "zmk,behavior-hold-tap";
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            #binding-cells = <2>;
+            bindings = <&mo>, <&kp>;
+        };
+
+        ht_mo_to: hold_tap_balanced_mo_to {
             compatible = "zmk,behavior-hold-tap";
             flavor = "balanced";
             tapping-term-ms = <200>;
@@ -238,7 +247,7 @@
                 // lower row left (6 keys)
                 <&none &kp DE_Z &kp X &kp C &kp V &kp B>,
                 // tumb upper (6 keys)
-                <&kp ESC &kp LCTRL &kp LALT &to NUMBLOCK &kp DEL &kp RET>,
+                <&kp ESC &kp LCTRL &kp LALT &ht_mo_to NUMBLOCK NUMBLOCK &kp DEL &kp RET>,
                 // lower row right (6 keys)
                 <&kp N &kp M &kp DE_COMMA &kp DE_DOT &kp DE_SLASH &none>,
 
@@ -254,9 +263,9 @@
         // SYMBOLS
         //F|   |   |   |   |   | __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |   |
         //N|   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
-        // |   | ? | = | { | ' | }  | __ | __ | __ | | __ | __ | __ |  # | & | ! | % | + |   |
+        // |   | ? | = | { | } | '  | __ | __ | __ | | __ | __ | __ |  # | & | ! | % | + |   |
         //>|   | @ | * | ( | " | )  | __ | __ | __ | | __ | __ | __ |  < | $ |Pip| > | - |   |
-        // |   | \ | ^ | [ | ` | ]  |    |    |    | |    |    |    |  ~ | _ | ; | : | / |   |
+        // |   | \ | ^ | [ | ] | `  |    |    |    | |    |    |    |  ~ | _ | ; | : | / |   |
         //L|Mag|   |   |   |   | __ |    |    |    | |SIns|    |    | __ |   |   |   |   |   |
         symbol_layer {
             bindings =
@@ -269,7 +278,7 @@
                 <&trans &trans &trans &trans &trans &trans>,
 
                 // upper row
-                <&trans &question &equal &lbrc &sqt &rbrc>,
+                <&trans &question &equal &lbrc &rbrc &sqt>,
                 <&hash &amps &excl &percent &plus &trans>,
 
                 // home row
@@ -277,7 +286,7 @@
                 <&less_than &dollar &pipe &gt &minus &trans>,
 
                 // lower row left
-                <&trans &backslash &caret &lbkt &grave &rbkt>,
+                <&trans &backslash &caret &lbkt &rbkt &grave>,
                 // tumb upper
                 <&trans &trans &trans &trans &trans &trans>,
                 // lower row right

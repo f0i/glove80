@@ -5,6 +5,19 @@
 This is the ZMK configuration of my MoErgo Glove80 wireless split contoured keyboard.
 Most of the configuration is inside the [glove80.keymap](config/glove80.keymap) file.
 
+For your own configuration, you might want to create your own configuration based on
+the [MoErgo Glove80 template repo](https://github.com/moergo-sc/glove80-zmk-config).
+
+The `bin/keys` tool is build in rust and can be found at [github.com:f0i/glove80-keys).
+
+## Features
+
+- Separate layers for typing (DEFAULT), programming symbols (SYMBOLS), special characters (GERMAN), and data input (NUMBLOCK).
+- Thumb clusters with modifier keys on the left thumb, and white space on the right thumb.
+- Shift is ignored for number keys and most symbols. This prevents some unwanted characters, especially with sticky shift enabled.
+- Colon and semicolon are shifted dot and comma ',' -> ';', '.' -> ':'.
+- Avoids function and number keys, as well as outer column of keys.
+
 ## Requirements
 
 - A [Glove80](https://www.moergo.com/collections/glove80-keyboards), obviously
@@ -16,70 +29,33 @@ The keymaps can be shown using the `bin/keys` command, which greps the [glove80.
 
 ![demo](demo.png)
 
-```text
+## Symbol layer objectives
 
-   DEFAULT
-  F|F1 |F2 |F3 |F4 |F5 | __ | __ | __ | __ | | __ | __ | __ | __ |F6 |F7 |F8 |F9 |F10|
-  N|F11| 1 | 2 | 3 | 4 | 5  | __ | __ | __ | | __ | __ | __ |  6 | 7 | 8 | 9 | 0 |F12|
-   |   | Q | W | E | R | T  | __ | __ | __ | | __ | __ | __ |  Y | U | I | O | P |   |
-  >|   | A | S | D | F | G  | __ | __ | __ | | __ | __ | __ |  H | J | K | L | - |   |
-   |   | Z | X | C | V | B  | Esc|Ctrl|LAlt| |GERM|Ctrl|Ret |  N | M | , | . | / |   |
-  L|✨ |Hom|End|Lft|Rgt| __ |Bksp|Shft|SYMB| |SYMB|Shft|Spce| __ |Dwn|Up |PDn|PUp|Sys|
-   Spce: &mod_space_alt_tab
+Ordered by priority, starting with highest: 
 
+- Must only use keys where letters are placed in the DEFAULT layer
+- Keys `,.` turn into `;:`, the same as with shift key
+- Keys `-/` are already in base layer and are kept at the same position
+- Frequently used keys should be plcaed easy to type positions (e.g. for left side: f, d, s, r, e, w, a, ..., z)
+- Name of symbols should reflect letters in typing layer (`* star`, `+ plus`)
+- Common patterns should avoid usage of the same finger twice in a row
+- Similar symbols should be placed in some kind of pattern (e.g. `()`, `{}`, `[]`, `<>`, `{([<`, `})]>`, `+-`, `&|`, ``'`"``, `?!`)
 
-   SYMBOLS
-  F|   |   |   |   |   | __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |   |
-  N|   | ! |   |   |   | %  | __ | __ | __ | | __ | __ | __ |  ^ |   |   |   | ø |   |
-   |   | ? | = | { | } | '  | __ | __ | __ | | __ | __ | __ |  # | ~ | & | + | ^ |   |
-  >|   | @ | * | ( | ) | "  | __ | __ | __ | | __ | __ | __ |  < | - |Pip| > | - |   |
-   |   | € | $ | [ | ] | `  |    |    |NUMB| |    |    |    |  \ | _ | , | . | / |   |
-  L|✨ |   |   |   |   | __ |    |    |    | |    |    |    | __ |   |   |   |   |   |
+### Examples of other symbol layers
 
+- https://getreuer.info/posts/keyboards/symbol-layer/index.html
+  - Great summary of different symbol layers for split keyboards
 
-   GERMAN
-  F|   |   |   |   |   | __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |   |
-  N|   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
-   |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    | Ü |   | Ö |   |   |
-  >|   | Ä | ß |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
-   |   |   |   |   |   |    |    |    |    | |    |    |    |    |   |   |   |   |   |
-  L|✨ |   |   |   |   | __ |    |    |    | |    |    |    | __ |   |   |   |   |   |
+- https://sunaku.github.io/ergohaven-remnant-keyboard.html#symbol-layer
+  - Popular in the glove80 community
+  - places all symbols on the left half of the keyboard
+  - makes use of the number and outer pinky keys as well as the lowest row [-]
 
+- https://my.glove80.com/#/layout/user/c2cc9af8-e3d9-44c5-9845-fd0e7799e49a
 
-   NUMBLOCK
-  F|   |   |   |   |   | __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |   |
-  N|   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |  ^ |   | * |   |   |   |
-   |   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    | 7 | 8 | 9 | + |   |
-  >|   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    | 4 | 5 | 6 | - |   |
-   |   |   |   |   |   |    |    |    |    | |    |    |    |    | 1 | 2 | 3 |Ret|   |
-  L|✨ |   |   |   |   | __ |    |    |SYMB| |SYMB|    |    | __ | 0 | 0 | . |Ret|   |
+- https://elixirforum.com/t/an-elixir-optimized-keyboard-layout/20730/9
+  - bracket paris placed on both halfs [+]
 
-
-   MAGIC
-  F|BtC|   |   |   |   | __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |BtC|
-  N|   |   |   |   |   |    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
-   |   |RGB|RGB|RGB|RGB|RGB | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
-  >|BLd|Spd|Sat|Hue|Brd|Efct| __ | __ | __ | | __ | __ | __ |    |   |   |   |   |BLd|
-   |Rst|   |   |   |   |    | BT2| BT3|    | |    |    |    |    |   |   |   |   |Rst|
-  L|✨ |   |   |   |   | __ | BT0| BT1| USB| |    |    |    | __ |   |   |   |   |   |
-
-
-   RGB
-  F|   |   |Cap|Num|Scr| __ | __ | __ | __ | | __ | __ | __ | __ |   |   |   |   |   |
-  N|DEF|SYM|GER|NUM|MAG|    | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
-   |UbL|UbL|UbL|UbL|UbL|UbL | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
-  >|UbR|UbR|UbR|UbR|UbR|UbR | __ | __ | __ | | __ | __ | __ |    |   |   |   |   |   |
-   |   |   |   |   |   |    | BT2| BT3|    | |    |    |    |    |   |   |   |   |   |
-  L|✨ |   |   |   |   | __ | BT0| BT1| USB| |    |    |    | __ |   |   |   |   |   |
-
-```
-
-## Resources
-
-For your own configuration, you might want to create your own configuration based on
-the [MoErgo Glove80 template repo](https://github.com/moergo-sc/glove80-zmk-config).
-
-The `bin/keys` tool is build in rust and can be found at [github.com:f0i/glove80-keys).
 
 ## Firmware Files
 
