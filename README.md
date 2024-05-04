@@ -37,9 +37,9 @@ Ordered by priority, starting with highest:
 - Keys `,.` turn into `;:`, the same as with shift key
 - Keys `-/` are already in base layer and are kept at the same position
 - Frequently used keys should be plcaed easy to type positions (e.g. for left side: f, d, s, r, e, w, a, ..., z)
-- Name of symbols should reflect letters in typing layer (`* star`, `+ plus`)
-- Common patterns should avoid usage of the same finger twice in a row
-- Similar symbols should be placed in some kind of pattern (e.g. `()`, `{}`, `[]`, `<>`, `{([<`, `})]>`, `+-`, `&|`, ``'`"``, `?!`)
+- Name of symbols should reflect letters in typing layer (`* star`, `+ plus`, `` ` backtick``, `' tick`, `? question mark`, `@ at`, `& und`, `! inverted i`, `= eqWal sign`, `% o/o`, `$ jQuery`, `~ nautical`)
+- Common patterns should avoid usage of the same finger twice in a row (`()`, `="`, ``, ``, ``)
+- Similar symbols should be placed in some kind of pattern (e.g. `()`, `{}`, `[]`, `<>`, `{([<`, `})]>`, `+-`, `&|`, ``'`"``, `\/`)
 
 ### Examples of other symbol layers
 
