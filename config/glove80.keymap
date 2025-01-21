@@ -254,7 +254,7 @@
                 // lowest left (5 keys)
                 <&magic MAGIC 0 &kp HOME &kp END &kp LEFT &kp RIGHT>,
                 // tumb lower (6 keys)
-                <&mo SYMBOLS &skq LSHFT &mo GERMAN &kp INSERT &kp BSPC &mod_space_alt_tab>,
+                <&mo SYMBOLS &kp LSHFT &mo GERMAN &kp INSERT &kp BSPC &mod_space_alt_tab>,
                 // lowest right (5 keys)
                 <&kp DOWN &kp UP &kp PG_DN &kp PG_UP &kp LGUI>
             ;
